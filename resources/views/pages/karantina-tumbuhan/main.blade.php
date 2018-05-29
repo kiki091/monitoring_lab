@@ -33,6 +33,7 @@
 			    			<th>Pengirim</th>
 			    			<th>Tgl. Terima</th>
 			    			<th>NIP Petugas</th>
+			    			<th>Option</th>
 			    		</tr>
 		    		</thead>
 
@@ -47,6 +48,9 @@
 		    				<td>@{{ list_permohonan.nama_pengantar }}</td>
 		    				<td>@{{ list_permohonan.tgl_terima_sample }}</td>
 		    				<td>@{{ list_permohonan.nip_petugas_penerima }}</td>
+		    				<td>
+		    					<a class="" :href="'{{ route('cms_karantina_tumbuhan_print_terima_sample','id=') }}'+list_permohonan.id" >Cetak Tanda Terima Sample</a>
+		    				</td>
 		    			</tr>
 		    		</tbody>
 		    	</table>

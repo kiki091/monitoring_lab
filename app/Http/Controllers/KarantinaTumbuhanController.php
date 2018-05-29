@@ -14,6 +14,8 @@ use App\Services\Bridge\SampleTumbuhan as SampleTumbuhanServices;
 use App\Services\Api\Response as ResponseService;
 use App\Custom\DataHelper;
 
+use Carbon\Carbon;
+use PDF;
 use Auth;
 use Session;
 use Validator;
@@ -58,6 +60,23 @@ class KarantinaTumbuhanController extends BaseController
         }
 
         return abort(404);
+    }
+
+
+    /**
+     * Index 
+     * @return string
+     */
+
+    public function print(Request $request)
+    {   
+        $date['tanggal'] = Carbon::now()->format('d M Y');
+
+        $data = $this->karantinaTumbuhan->edit($request->all());
+
+        $pdf = PDF::loadView(self::URL_BLADE_CMS. '.karantina-tumbuhan.print-out.tanda-terima-sample', $data, $date);
+        
+        return $pdf->setPaper('a4', 'landscape')->download('tanda-terima-sample.pdf');
     }
 
     /**

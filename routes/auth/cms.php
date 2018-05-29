@@ -19,6 +19,7 @@ Route::group(['prefix' => 'karantina-tumbuhan'], function () {
 	Route::post('edit', 'KarantinaTumbuhanController@edit')->name('cms_karantina_tumbuhan_edit');
 	Route::get('varifikasi', 'KarantinaTumbuhanController@varifikasi')->name('cms_karantina_tumbuhan_varifikasi');
 	Route::post('confirm', 'KarantinaTumbuhanController@confirm')->name('cms_karantina_tumbuhan_confirm');
+	Route::get('print', 'KarantinaTumbuhanController@print')->name('cms_karantina_tumbuhan_print_terima_sample');
 });
 
 Route::group(['prefix' => 'korfug'], function () {

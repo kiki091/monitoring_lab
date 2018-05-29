@@ -38,11 +38,8 @@ class SampleTumbuhan extends BaseImplementation implements SampleTumbuhanInterfa
      * @return array
      */
 
-    public function getData($param)
+    public function getData($params)
     {
-    	$params = [
-    		'order'	=> 'order',
-    	];
 
     	$sampleTumbuhanData = $this->sampleTumbuhan($params, 'asc', 'array', false);
 
@@ -118,9 +115,10 @@ class SampleTumbuhan extends BaseImplementation implements SampleTumbuhanInterfa
      * @return array
      */
 
-    public function edit($param)
+    public function edit($params)
     {
-        dd($params);
+
+        return $this->sampleTumbuhanTransformation->getSingleDataTransform($this->sampleTumbuhan($params, 'asc', 'array', true));
     }
 
     /**

@@ -41,10 +41,10 @@
 			margin-bottom: 10px; 
 		}
 		.footer {
-			width: 100%;height: auto;display: inline-table; float: left;
+			width: 100%;height: auto;display: inline-table;
 		}
 		.footer_wrapper_left {
-			width: 25%; float: left; margin:10px; padding:5px; font-weight: bold; font-size:12px;
+			width: 50%; float: left; margin:10px; padding:5px; font-weight: bold; font-size:12px;
 		}
 		.footer_wrapper_right {
 			width: 25%; float: right; margin:10px; padding:5px; font-weight: bold; font-size:12px;
@@ -70,14 +70,15 @@
 	<table class="table_header" cellpadding="1" cellspacing="0" style="margin-bottom: 10px;">
 		<tbody>
 		<tr>
-			<td><b>Tanggal</b></td><td>: {{ $tanggal }}</td><td>Jenis Sample</td><td>
+			<td><b>Tanggal</b></td><td>: {{ $tanggal }}</td>
+			<td><b>Jenis Sample</b></td><td>: {{ isset($jenis_sample) ? $jenis_sample : '' }}</td>
 		</tr>
 		<tr>
 			<td><b>Kode Sample</b></td><td>: {{ isset($kode_sample) ? $kode_sample : '' }}</td>
 			<td><b>Jumlah Sample</b></td><td>: {{ isset($jml_vol) ? $jml_vol : '' }} ({{ isset($satuan_sample) ? $satuan_sample : '' }})</td>
 		</tr>
 		<tr>
-			<td>Media Pembawa</td><td></td>
+			<td><b>Media Pembawa</b></td><td>: {{ isset($nama_sample) ? $nama_sample : '' }}</td>
 			<td><b>Laboratorium</b></td>
 			<td>: {{ isset($laboratorium) ? $laboratorium : '' }}</td>
 			
@@ -107,7 +108,8 @@
 			<br/>
 			<br/>
 			<br/>
-			<p>NIP: {{ isset($nip_dokter) ? $nip_dokter : '' }}</p>
+			<br/>
+			<p>NIP: {{ isset($nip_petugas_penerima) ? $nip_petugas_penerima : '' }}</p>
 		</div>
 		<div class="footer_wrapper_right">
 			<p>Yang Menyerahkan</p>
@@ -116,7 +118,7 @@
 			<br/>
 			<br/>
 			<br/>
-			<p>NIP: {{ isset($nama_dokter) ? $nama_dokter : '' }}</p>
+			<p>{{ isset($nama_dokter) ? $nama_dokter : '' }}</p>
 		</div>
 	</div>
 </body>

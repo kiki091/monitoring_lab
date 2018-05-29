@@ -16,6 +16,18 @@ class SampleTumbuhan
 
         return $this->setDataTransform($data);
     }
+    /**
+     * Get Transformation
+     * @param $data
+     * @return array
+     */
+    public function getSingleDataTransform($data)
+    {
+        if(!is_array($data) || empty($data))
+            return array();
+
+        return $this->setSingleDataTransform($data);
+    }
 
     /**
      * Set Transformation
@@ -47,6 +59,11 @@ class SampleTumbuhan
         },$data);
 
         return $dataTransform;
+    }
+
+    protected function setSingleDataTransform($data)
+    {
+        $objData['id'] = isset($data['id']) ? $data['id'] : '';
     }
 
 }

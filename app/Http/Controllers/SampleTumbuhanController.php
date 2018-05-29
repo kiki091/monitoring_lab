@@ -9,6 +9,7 @@ use App\Services\Bridge\TargetPengujian as TargetPengujianServices;
 use App\Services\Api\Response as ResponseService;
 use App\Custom\DataHelper;
 
+use Carbon\Carbon;
 use Auth;
 use Session;
 use Validator;
@@ -43,23 +44,6 @@ class SampleTumbuhanController extends BaseController
         }
 
         return abort(404);
-    }
-
-
-    /**
-     * Index 
-     * @return string
-     */
-
-    public function print(Request $request)
-    {   
-        $date['tanggal'] = Carbon::now()->format('d M Y');
-
-        $data = $this->sampleTumbuhan->edit($request->all());
-
-        $pdf = PDF::loadView(self::URL_BLADE_CMS. '.korfug.print-permintaan', $data, $date);
-        
-        return $pdf->setPaper('a4', 'landscape')->download('report.pdf');
     }
 
     /**
