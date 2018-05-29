@@ -22,14 +22,13 @@ function crud_karantina_tumbuhan() {
                 tgl_permohonan: '',
                 kodefikasi_sample: '',
                 kode_area: '',
-                dokument_pendukung: '',
-                lampiran_hsl_uji: '',
-                pengiriman_sample: '',
-                nama_pengantar: '',
-                tgl_terima_sample: '',
-                nip_petugas_penerima: '',
             },
-
+            nip_petugas_penerima: '',
+            nama_pengantar: '',
+            tgl_terima_sample: '',
+            dokument_pendukung: '',
+            lampiran_hsl_uji: '',
+            pengiriman_sample: '',
             list_perusahaan: {},
             perusahaan_selector: '',
 
@@ -123,8 +122,7 @@ function crud_karantina_tumbuhan() {
 
             editData: function(id) {
 
-                this.edit = true
-                this.checkFunctions = []          
+                this.edit = true        
                 var payload = []
                 payload['id'] = id
                 payload['_token'] = token
@@ -137,15 +135,25 @@ function crud_karantina_tumbuhan() {
 
                 var domain  = laroute.route('cms_karantina_tumbuhan_edit', []);
                 this.$http.post(domain, form).then(function(response) {
+                    this.models = response.data
+                    this.perusahaan_selector = response.data.perusahaan_id
+                    this.kegiatan_selector = response.data.kegiatan_id
+                    this.dokter_selector = response.data.dokter_id
+                    this.upt_selector = response.data.upt_id
+                    this.sample_selector = response.data.kodefikasi_sample
+                    this.kategori_selector = response.data.kategori_id
+                    this.dokument_pendukung = response.data.dokument_pendukung_url
+                    this.lampiran_hsl_uji = response.data.lampiran_hsl_uji_url
+                    this.pengiriman_sample = response.data.pengiriman_sample_url
+                    this.nama_pengantar= response.data.nama_pengantar
+                    this.tgl_terima_sample= response.data.tgl_terima_sample
+                    this.nip_petugas_penerima= response.data.nip_petugas_penerima
+                    
 
-                    response = response.data
-                    if (response.status) {
-                        this.models = response.data;
-                        
-
-                    } else {
-                        pushNotif(response.status,response.message)
-                    }
+                    document.getElementById("lampiran_hsl_uji_"+response.data.lampiran_hsl_uji).checked = true;
+                    document.getElementById("pengiriman_sample_"+response.data.pengiriman_sample).checked = true;
+    
+                    $('#toggle-form-content').slideDown('swing')
                 })
             },
 

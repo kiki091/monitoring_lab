@@ -172,8 +172,12 @@ class KarantinaTumbuhanController extends BaseController
             'nama_pengantar'        => 'required',
             'tgl_terima_sample'     => 'required',
             'nip_petugas_penerima'  => 'required',
-            //'dokument_pendukung'    => 'required',
+            //'dokument_pendukung'    => 'required|max:20000|mimes:pdf, doc,docx, xls, xlxs',
         ];
+
+        if(!empty($request['dokument_pendukung'])) {
+            $rules['dokument_pendukung'] = 'required|max:20000|mimes:pdf, doc,docx,xlsx';
+        }
 
         return $rules;
     }

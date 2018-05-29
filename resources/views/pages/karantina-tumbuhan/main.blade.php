@@ -34,6 +34,7 @@
 			    			<th>Tgl. Terima</th>
 			    			<th>NIP Petugas</th>
 			    			<th>Option</th>
+			    			<th>Update</th>
 			    		</tr>
 		    		</thead>
 
@@ -50,6 +51,9 @@
 		    				<td>@{{ list_permohonan.nip_petugas_penerima }}</td>
 		    				<td>
 		    					<a class="" :href="'{{ route('cms_karantina_tumbuhan_print_terima_sample','id=') }}'+list_permohonan.id" >Cetak Tanda Terima Sample</a>
+		    				</td>
+		    				<td>
+		    					<a href="#" @click="editData(list_permohonan.id)">Update Data</a>
 		    				</td>
 		    			</tr>
 		    		</tbody>

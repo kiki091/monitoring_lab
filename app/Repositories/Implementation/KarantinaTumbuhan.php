@@ -6,7 +6,7 @@ use App\Repositories\Implementation\BaseImplementation;
 use App\Repositories\Contracts\KarantinaTumbuhan as KarantinaTumbuhanInterface;
 use App\Models\KarantinaTumbuhan as KarantinaTumbuhanModel;
 use App\Services\Transformation\KarantinaTumbuhan as KarantinaTumbuhanTransformation;
-use App\Custom\Facades\DataHelper;
+use App\Custom\Auth\DataHelper;
 
 use Carbon\Carbon;
 use Cache;
@@ -53,15 +53,20 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
      * @return array
      */
 
-    public function store($param)
+    public function store($params)
     {
         try {
             
             DB::beginTransaction();
 
-            if(!$this->storeData($param)) {
+            if(!$this->storeData($params)) {
                 DB::rollBack();
-                return $this->setResponse("Failed save data", false);
+                return $this->setResponse($this->message, false);
+            }
+
+            if (!$this->uploadFile($params)) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
             }
 
             DB::commit();
@@ -100,12 +105,14 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
             {
                 $eloquent = $this->karantinaTumbuhan->find($params['id']);
                 $eloquent->updated_at    = Carbon::now();
+                $eloquent->updated_by    = DataHelper::userId();
 
             } else {
 
                 if($this->generateRequestNumber() == true)
                 {
                     $eloquent->no_permohonan = $this->no_permohonan;
+                    $eloquent->user_id       = DataHelper::userId();
 
                 } else {
 
@@ -126,7 +133,11 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
             $eloquent->nama_pengantar       = isset($params['nama_pengantar']) ? $params['nama_pengantar'] : '';
             $eloquent->tgl_terima_sample    = isset($params['tgl_terima_sample']) ? $params['tgl_terima_sample'] : '';
             $eloquent->nip_petugas_penerima = isset($params['nip_petugas_penerima']) ? $params['nip_petugas_penerima'] : '';
-            $eloquent->dokument_pendukung   = isset($params['dokument_pendukung']) ? $params['dokument_pendukung'] : '';
+
+            if(!empty($params['dokument_pendukung'])) {
+                $eloquent->dokument_pendukung   = $params['dokument_pendukung']->getClientOriginalName();
+            }
+
             $eloquent->keterangan           = isset($params['keterangan']) ? $params['keterangan'] : '';
             $eloquent->created_at           = Carbon::now();
 
@@ -136,6 +147,43 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
             return false;
 
         } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Upload Desktop Images
+     * @param $data
+     * @return true
+     */
+
+    protected function uploadFile($data)
+    {
+        try {
+
+            if (isset($data['dokument_pendukung']) && !empty($data['dokument_pendukung']))
+            {
+                if ($data['dokument_pendukung']->isValid()) {
+
+                    $filename = $data['dokument_pendukung']->getClientOriginalName();
+
+                    if (! $data['dokument_pendukung']->move('./upload/document/', $filename)) {
+                        $this->message = 'Failed upload images';
+                        return false;
+                    }
+
+                    return true;
+
+                } else {
+                    $this->message = $data['brochure']->getErrorMessage();
+                    return false;
+                }
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
             return false;
         }
     }

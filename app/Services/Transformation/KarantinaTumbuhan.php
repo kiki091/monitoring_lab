@@ -80,6 +80,7 @@ class KarantinaTumbuhan
         $objData['kode_area'] = isset($data['kode_area']) ? $data['kode_area'] : '';
         $objData['perusahaan_id'] = isset($data['perusahaan_id']) ? $data['perusahaan_id'] : '';
         $objData['dokument_pendukung'] = isset($data['dokument_pendukung']) ? $data['dokument_pendukung'] : '';
+        $objData['dokument_pendukung_url'] = isset($data['dokument_pendukung']) ? asset('/upload/document/'.$data['dokument_pendukung']) : '';
         $objData['lampiran_hsl_uji'] = isset($data['lampiran_hsl_uji']) ? $data['lampiran_hsl_uji'] : '';
         $objData['pengiriman_sample'] = isset($data['pengiriman_sample']) ? $data['pengiriman_sample'] : '';
         $objData['nama_pengantar'] = isset($data['nama_pengantar']) ? $data['nama_pengantar'] : '';
@@ -87,6 +88,8 @@ class KarantinaTumbuhan
         $objData['nip_petugas_penerima'] = isset($data['nip_petugas_penerima']) ? $data['nip_petugas_penerima'] : '';
         $objData['keterangan'] = isset($data['keterangan']) ? $data['keterangan'] : '';
         $objData['status'] = isset($data['status']) ? $data['status'] : '';
+        $objData['saran'] = isset($data['saran']) ? $data['saran'] : '';
+
         $objData['kategori'] = isset($data['kategori']['nama_kategori']) ? $data['kategori']['nama_kategori'] : '';
         $objData['upt'] = isset($data['upt']['nama_upt']) ? $data['upt']['nama_upt'] : '';
         $objData['kode_upt'] = isset($data['upt']['kode_upt']) ? $data['upt']['kode_upt'] : '';

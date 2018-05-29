@@ -198,7 +198,7 @@ class Users extends BaseImplementation implements UserInterface
         
         try {
             
-            $user = UserModel::find($userId['id'])->toArray();
+            $user = UserModel::find($userId['id']);
 
             if(Hash::check($data['old_password'], $user['password']))
             {
@@ -207,9 +207,11 @@ class Users extends BaseImplementation implements UserInterface
                 
                 return $save;    
             }
-            else
-                
+            else {
+
                 return false;
+            }
+                
         } catch (Exception $e) {
             return $this->setResponse($e->getMessage(), false);
         }

@@ -98,7 +98,7 @@
 
 									<div class="new__form__field">
 										<label>Dokumen Pendukung</label>
-										<input type="file" name="dokument_pendukung">
+										<input type="file" name="dokument_pendukung" >
 										<div class="form--error--message--left" id="form--error--message--dokument_pendukung"></div>
 									</div>
 
@@ -107,7 +107,7 @@
 										<ul class="to_do">
 											<li>
 												<div class="radio icheck-primary">
-													<input class="checkbox__data" type="radio" value="1" name="lampiran_hsl_uji" id="lampiran_hsl_uji_1" v-bind::checked="models.lampiran_hsl_uji == 1" v-model="models.lampiran_hsl_uji" />
+													<input class="checkbox__data" type="radio" value="1" name="lampiran_hsl_uji" id="lampiran_hsl_uji_1" v-bind::checked="lampiran_hsl_uji == 1" />
 												    <label for="lampiran_hsl_uji_1">
 												    	Ada
 												    </label>
@@ -115,7 +115,7 @@
 											</li>
 											<li>
 												<div class="radio icheck-primary">
-													<input class="checkbox__data" type="radio" value="0" name="lampiran_hsl_uji" id="lampiran_hsl_uji_0"  v-bind::checked="models.lampiran_hsl_uji == 0" v-model="models.lampiran_hsl_uji" />
+													<input class="checkbox__data" type="radio" value="0" name="lampiran_hsl_uji" id="lampiran_hsl_uji_0"  v-bind::checked="lampiran_hsl_uji == 0" />
 												    <label for="lampiran_hsl_uji_0">
 												    	Tidak Ada
 												    </label>
@@ -129,7 +129,7 @@
 										<ul class="to_do">
 											<li>
 												<div class="radio icheck-primary">
-													<input class="checkbox__data" type="radio" value="1" name="pengiriman_sample" id="pengiriman_sample_1" v-bind::checked="models.pengiriman_sample == 1" v-model="models.pengiriman_sample" />
+													<input class="checkbox__data" type="radio" value="1" name="pengiriman_sample" id="pengiriman_sample_1" v-bind::checked="pengiriman_sample == 1" />
 												    <label for="pengiriman_sample_1">
 												    	Diantar Langsung
 												    </label>
@@ -137,8 +137,8 @@
 											</li>
 											<li>
 												<div class="radio icheck-primary">
-													<input class="checkbox__data" type="radio" value="0" name="pengiriman_sample" id="pengiriman_sample_0"  v-bind::checked="models.pengiriman_sample == 0" v-model="models.pengiriman_sample" />
-												    <label for="pengiriman_sample_0">
+													<input class="checkbox__data" type="radio" value="2" name="pengiriman_sample" id="pengiriman_sample_2"  v-bind::checked="pengiriman_sample == 2" />
+												    <label for="pengiriman_sample_2">
 												    	Jasa Pos/Paket/Kurir
 												    </label>
 												</div>
@@ -149,7 +149,7 @@
 									<div class="new__form__field">
 										<label>Nama Pengantar</label>
 										<div class="field__icon">
-											<input v-model="models.nama_pengantar" name="nama_pengantar" type="text" id="nama_pengantar" class="form-control" placeholder="Enter here">
+											<input :value="nama_pengantar" name="nama_pengantar" type="text" id="nama_pengantar" class="form-control" placeholder="Enter here">
 										</div>
 										<div class="form--error--message--left" id="form--error--message--nama_pengantar"></div>
 									</div>
@@ -157,7 +157,7 @@
 									<div class="new__form__field">
 										<label>Tanggal Terima Sample</label>
 										<div class="field__icon">
-											<input v-model="models.tgl_terima_sample" name="tgl_terima_sample" type="date" id="tgl_terima_sample" class="form-control" placeholder="Enter here">
+											<input v-model="tgl_terima_sample" name="tgl_terima_sample" type="date" id="tgl_terima_sample" class="form-control" placeholder="Enter here">
 										</div>
 										<div class="form--error--message--left" id="form--error--message--tgl_terima_sample"></div>
 									</div>
@@ -165,7 +165,7 @@
 									<div class="new__form__field">
 										<label>NIP Petugas Penerima</label>
 										<div class="field__icon">
-											<input v-model="models.nip_petugas_penerima" name="nip_petugas_penerima" type="text" id="nip_petugas_penerima" class="form-control" placeholder="Enter here">
+											<input v-model="nip_petugas_penerima" name="nip_petugas_penerima" type="text" id="nip_petugas_penerima" class="form-control" placeholder="Enter here">
 										</div>
 										<div class="form--error--message--left" id="form--error--message--nip_petugas_penerima"></div>
 									</div>
