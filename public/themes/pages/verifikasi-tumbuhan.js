@@ -9,7 +9,7 @@
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-function crud_verifikasi_permohonan() {
+function crud_verifikasi_tumbuhan() {
     var token = Vue.http.headers.common['X-CSRF-TOKEN'] = $("#_token").attr("value");
 
     var controller = new Vue({
@@ -22,7 +22,7 @@ function crud_verifikasi_permohonan() {
                 saran: '',
             },
             data: {},
-            form_add_title: "Verifikasi Permohonan",
+            form_add_title: "Verifikasi Karantina Tumbuhan",
             edit: false,
         },
 
@@ -82,8 +82,8 @@ function crud_verifikasi_permohonan() {
 
                 };
 
-                $("#form__verifikasi_permohonan").ajaxForm(optForm);
-                $("#form__verifikasi_permohonan").submit();
+                $("#form__verifikasi_karantina_tumbuhan").ajaxForm(optForm);
+                $("#form__verifikasi_karantina_tumbuhan").submit();
             },
 
             showData: function(id)
@@ -118,7 +118,7 @@ function crud_verifikasi_permohonan() {
                 this.models.status = ''
 
                 this.target_selector = ''
-                this.form_add_title = "Verifikasi Permohonan"
+                this.form_add_title = "Verifikasi Karantina Tumbuhan"
                 this.clearErrorMessage()
                 this.edit = false
             },

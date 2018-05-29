@@ -39,6 +39,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\Penugasan', 'App\Repositories\Implementation\Penugasan');
         $this->app->bind('App\Repositories\Contracts\HasilLaboratorium', 'App\Repositories\Implementation\HasilLaboratorium');
         $this->app->bind('App\Repositories\Contracts\Korfug', 'App\Repositories\Implementation\Korfug');
+        $this->app->bind('App\Repositories\Contracts\KarantinaHewan', 'App\Repositories\Implementation\KarantinaHewan');
+        $this->app->bind('App\Repositories\Contracts\SampleHewan', 'App\Repositories\Implementation\SampleHewan');
     }
 
     /**
@@ -65,6 +67,8 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\Penugasan',
             'App\Repositories\Contracts\HasilLaboratorium',
             'App\Repositories\Contracts\Korfug',
+            'App\Repositories\Contracts\KarantinaHewan',
+            'App\Repositories\Contracts\SampleHewan',
         );
     }
 }

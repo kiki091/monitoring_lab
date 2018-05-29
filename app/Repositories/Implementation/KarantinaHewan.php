@@ -3,9 +3,9 @@
 namespace App\Repositories\Implementation;
 
 use App\Repositories\Implementation\BaseImplementation;
-use App\Repositories\Contracts\KarantinaTumbuhan as KarantinaTumbuhanInterface;
-use App\Models\KarantinaTumbuhan as KarantinaTumbuhanModel;
-use App\Services\Transformation\KarantinaTumbuhan as KarantinaTumbuhanTransformation;
+use App\Repositories\Contracts\KarantinaHewan as KarantinaHewanInterface;
+use App\Models\KarantinaHewan as KarantinaHewanModel;
+use App\Services\Transformation\KarantinaHewan as KarantinaHewanTransformation;
 use App\Custom\Auth\DataHelper;
 
 use Carbon\Carbon;
@@ -15,20 +15,20 @@ use DB;
 use Auth;
 use Hash;
 
-class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanInterface
+class KarantinaHewan extends BaseImplementation implements KarantinaHewanInterface
 {
 
-    protected $karantinaTumbuhan;
-    protected $karantinaTumbuhanTransformation;
+    protected $karantinaHewan;
+    protected $karantinaHewanTransformation;
 
     protected $no_permohonan;
     protected $message;
 
-    function __construct(KarantinaTumbuhanModel $karantinaTumbuhan, KarantinaTumbuhanTransformation $karantinaTumbuhanTransformation)
+    function __construct(KarantinaHewanModel $karantinaHewan, KarantinaHewanTransformation $karantinaHewanTransformation)
     {
 
-        $this->karantinaTumbuhan = $karantinaTumbuhan;
-        $this->karantinaTumbuhanTransformation = $karantinaTumbuhanTransformation;
+        $this->karantinaHewan = $karantinaHewan;
+        $this->karantinaHewanTransformation = $karantinaHewanTransformation;
     }
 
     /**
@@ -41,9 +41,9 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
     public function getData($params)
     {
 
-    	$karantinaTumbuhanData = $this->karantinaTumbuhan($params, 'asc', 'array', false);
+    	$karantinaHewanData = $this->karantinaHewan($params, 'asc', 'array', false);
 
-    	return $this->karantinaTumbuhanTransformation->getDataTransform($karantinaTumbuhanData);
+    	return $this->karantinaHewanTransformation->getDataTransform($karantinaHewanData);
     }
 
     /**
@@ -80,9 +80,9 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
 
     protected function generateRequestNumber()
     {
-        $this->no_permohonan = 'KRNT-T-'.Carbon::now()->format('Y').'/'.Carbon::now()->format('m').'/'.Carbon::now()->format('d').'/'.rand(1000, 100000);
+        $this->no_permohonan = 'KRNT-H-'.Carbon::now()->format('Y').'/'.Carbon::now()->format('m').'/'.Carbon::now()->format('d').'/'.rand(1000, 100000);
 
-        $data = $this->karantinaTumbuhan->where('no_permohonan', $this->no_permohonan)->get()->toArray();
+        $data = $this->karantinaHewan->where('no_permohonan', $this->no_permohonan)->get()->toArray();
 
         if(count($data) == 0)
         {
@@ -97,11 +97,11 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
 
         try {
             
-            $eloquent = $this->karantinaTumbuhan;
+            $eloquent = $this->karantinaHewan;
 
             if(isset($params['id']) && !empty($params['id'])) 
             {
-                $eloquent = $this->karantinaTumbuhan->find($params['id']);
+                $eloquent = $this->karantinaHewan->find($params['id']);
                 $eloquent->updated_at    = Carbon::now();
                 $eloquent->updated_by    = DataHelper::userId();
 
@@ -118,26 +118,25 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
                 }
             }
 
-            $eloquent->tgl_permohonan       = isset($params['tgl_permohonan']) ? $params['tgl_permohonan'] : '';
-            $eloquent->upt_id               = isset($params['upt_id']) ? $params['upt_id'] : '';
-            $eloquent->kategori_id          = isset($params['kategori_id']) ? $params['kategori_id'] : '';
-            $eloquent->kodefikasi_sample    = isset($params['kodefikasi_sample']) ? $params['kodefikasi_sample'] : '';
-            $eloquent->dokter_id            = isset($params['dokter_id']) ? $params['dokter_id'] : '';
-            $eloquent->kegiatan_id          = isset($params['kegiatan_id']) ? $params['kegiatan_id'] : '';
-            $eloquent->kode_area            = isset($params['kode_area']) ? $params['kode_area'] : '';
-            $eloquent->perusahaan_id        = isset($params['perusahaan_id']) ? $params['perusahaan_id'] : '';
-            $eloquent->lampiran_hsl_uji     = isset($params['lampiran_hsl_uji']) ? $params['lampiran_hsl_uji'] : '';
-            $eloquent->pengiriman_sample    = isset($params['pengiriman_sample']) ? $params['pengiriman_sample'] : '';
-            $eloquent->nama_pengantar       = isset($params['nama_pengantar']) ? $params['nama_pengantar'] : '';
-            $eloquent->tgl_terima_sample    = isset($params['tgl_terima_sample']) ? $params['tgl_terima_sample'] : '';
-            $eloquent->nip_petugas_penerima = isset($params['nip_petugas_penerima']) ? $params['nip_petugas_penerima'] : '';
+            $eloquent->tgl_permohonan             = isset($params['tgl_permohonan']) ? $params['tgl_permohonan'] : '';
+            $eloquent->kode_sample_hewan_id       = isset($params['kode_sample_hewan_id']) ? $params['kode_sample_hewan_id'] : '';
+            $eloquent->dokter_hewan_id            = isset($params['dokter_hewan_id']) ? $params['dokter_hewan_id'] : '';
+            $eloquent->kegiatan_id                = isset($params['kegiatan_id']) ? $params['kegiatan_id'] : '';
+            $eloquent->negara_id                  = isset($params['negara_id']) ? $params['negara_id'] : '';
+            $eloquent->nama_pemilik               = isset($params['nama_pemilik']) ? $params['nama_pemilik'] : '';
+            $eloquent->lampiran_hasil_uji         = isset($params['lampiran_hasil_uji']) ? $params['lampiran_hasil_uji'] : '';
+            $eloquent->pengiriman_sample          = isset($params['pengiriman_sample']) ? $params['pengiriman_sample'] : '';
+            $eloquent->nama_pengirim              = isset($params['nama_pengirim']) ? $params['nama_pengirim'] : '';
+            $eloquent->tgl_terima_sample          = isset($params['tgl_terima_sample']) ? $params['tgl_terima_sample'] : '';
+            $eloquent->nip_petugas_penerima       = isset($params['nip_petugas_penerima']) ? $params['nip_petugas_penerima'] : '';
 
             if(!empty($params['dokument_pendukung'])) {
-                $eloquent->dokument_pendukung   = $params['dokument_pendukung']->getClientOriginalName();
+                $eloquent->dokument_pendukung     = $params['dokument_pendukung']->getClientOriginalName();
             }
 
-            $eloquent->keterangan           = isset($params['keterangan']) ? $params['keterangan'] : '';
-            $eloquent->created_at           = Carbon::now();
+            $eloquent->keterangan                 = isset($params['keterangan']) ? $params['keterangan'] : '';
+            $eloquent->saran                      = isset($params['saran']) ? $params['saran'] : '';
+            $eloquent->created_at                 = Carbon::now();
 
             if($eloquent->save())
                 return true;
@@ -195,7 +194,7 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
 
     public function edit($params)
     {
-        return $this->karantinaTumbuhanTransformation->getSingleDataTransform($this->karantinaTumbuhan($params, 'asc', 'array', true));
+        return $this->karantinaHewanTransformation->getSingleDataTransform($this->karantinaHewan($params, 'asc', 'array', true));
     }
 
     /**
@@ -214,7 +213,7 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
 
             DB::beginTransaction();
 
-            $oldData = $this->karantinaTumbuhan
+            $oldData = $this->karantinaHewan
                 ->where('id', $params['id'])
                 ->first()->toArray();
 
@@ -224,7 +223,7 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
                 'updated_at' => Carbon::now()
             ];
 
-            $changeStatus = $this->karantinaTumbuhan
+            $changeStatus = $this->karantinaHewan
                 ->where('id', $params['id'])
                 ->update($updatedData);
 
@@ -249,31 +248,31 @@ class KarantinaTumbuhan extends BaseImplementation implements KarantinaTumbuhanI
      * @return array
      */
     
-    protected function karantinaTumbuhan($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
+    protected function karantinaHewan($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
     {
-    	$karantinaTumbuhan = $this->karantinaTumbuhan->with(['kategori', 'upt', 'dokter', 'kegiatan', 'perusahaan', 'sample', 'korfug'])->orderBy('created_at', 'desc')->where('user_id', DataHelper::userId());
+    	$karantinaHewan = $this->karantinaHewan->with(['dokter', 'kegiatan', 'sample'])->orderBy('created_at', 'desc')->where('user_id', DataHelper::userId());
 
-        if(isset($params['id'])) {
-            $karantinaTumbuhan = $this->karantinaTumbuhan->with(['kategori', 'upt', 'dokter', 'kegiatan', 'perusahaan', 'sample', 'korfug'])->where('id', $params['id']);
+        if(isset($params['id']) && !empty($params['id'])) {
+            $karantinaHewan = $this->karantinaHewan->with(['dokter', 'kegiatan', 'sample'])->where('id', $params['id']);
         }
 
         if(isset($params['status']) && !empty($params['status'])) {
-            // $karantinaTumbuhan->where('status', $params['status']);
+            // $karantinaHewan->where('status', $params['status']);
         }
 
         if(isset($params['permohonan_id']) && !empty($params['permohonan_id'])) {
-            $karantinaTumbuhan = $this->karantinaTumbuhan->with(['kategori', 'upt', 'dokter', 'kegiatan', 'perusahaan', 'sample', 'korfug'])->where('id', $params['permohonan_id']);
+            $karantinaHewan = $this->karantinaHewan->with(['dokter', 'kegiatan', 'sample'])->where('id', $params['permohonan_id']);
         }
 
-        if(!$karantinaTumbuhan->count())
+        if(!$karantinaHewan->count())
             return array();
 
         switch ($returnType) {
             case 'array':
                 if(!$returnSingle) {
-                    return $karantinaTumbuhan->get()->toArray();
+                    return $karantinaHewan->get()->toArray();
                 } else {
-                    return $karantinaTumbuhan->first()->toArray();
+                    return $karantinaHewan->first()->toArray();
                 }
             break;
         }

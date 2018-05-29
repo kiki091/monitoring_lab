@@ -159,6 +159,54 @@ LOCK TABLES `tbl_jabatan` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tbl_karantina_hewan`
+--
+
+DROP TABLE IF EXISTS `tbl_karantina_hewan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tbl_karantina_hewan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `no_permohonan` varchar(100) NOT NULL,
+  `kode_sample_hewan_id` int(10) NOT NULL,
+  `dokter_hewan_id` int(10) NOT NULL,
+  `kegiatan_id` int(10) NOT NULL,
+  `negara_id` int(10) DEFAULT NULL,
+  `nama_pemilik` varchar(100) DEFAULT NULL,
+  `lampiran_hasil_uji` int(1) DEFAULT '1' COMMENT '1 : ada\n0 : Tidak ada',
+  `dokument_pendukung` varchar(255) DEFAULT NULL,
+  `pengiriman_sample` int(1) DEFAULT '1' COMMENT '1 : Diantar Langsung\n2 : Jasa Pos/Kurir',
+  `nama_pengirim` varchar(100) DEFAULT NULL,
+  `tgl_terima_sample` date DEFAULT NULL,
+  `nip_petugas_penerima` varchar(70) DEFAULT NULL,
+  `keterangan` text,
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '0= ditolak\n1 = pending\n2= disetujui',
+  `saran` text,
+  `tgl_permohonan` date DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `user_id` int(10) DEFAULT '1',
+  `updated_by` int(10) DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `no_permohonan_UNIQUE` (`no_permohonan`),
+  KEY `fk_tbl_karantina_hewan_1_idx` (`dokter_hewan_id`),
+  KEY `fk_tbl_karantina_hewan_2_idx` (`kegiatan_id`),
+  CONSTRAINT `fk_tbl_karantina_hewan_1` FOREIGN KEY (`dokter_hewan_id`) REFERENCES `tbl_dokter` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_tbl_karantina_hewan_2` FOREIGN KEY (`kegiatan_id`) REFERENCES `tbl_kegiatan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_karantina_hewan`
+--
+
+LOCK TABLES `tbl_karantina_hewan` WRITE;
+/*!40000 ALTER TABLE `tbl_karantina_hewan` DISABLE KEYS */;
+INSERT INTO `tbl_karantina_hewan` VALUES (1,'PRM-P04QDVYCKF7IO1MT8LAZN632EGJS9BR5WHXU',1,1,1,62,'kiki',1,'report (2).pdf',1,'Pendi','2018-05-30','11236678789','',2,'','2018-05-30','2018-05-29 19:32:21','2018-05-29 19:40:01',1,1),(2,'KRNT-H-2018/05/29/46533',1,1,1,62,'kiki',1,NULL,2,'Pendi','2018-05-29','11236678789','',1,'','2018-05-29','2018-05-29 19:36:23','2018-05-29 19:36:23',1,1);
+/*!40000 ALTER TABLE `tbl_karantina_hewan` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbl_karantina_tumbuhan`
 --
 
@@ -454,6 +502,45 @@ INSERT INTO `tbl_perusahaan` VALUES (1,'KP-1219','PT. Equalindo Makmur Alam Seja
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tbl_sample_hewan`
+--
+
+DROP TABLE IF EXISTS `tbl_sample_hewan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tbl_sample_hewan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kode_sample` varchar(45) NOT NULL,
+  `nama_sample` varchar(200) NOT NULL,
+  `jenis_sample` varchar(100) DEFAULT NULL,
+  `jml_vol` int(5) DEFAULT NULL,
+  `satuan` varchar(45) DEFAULT NULL,
+  `tgl_pengambilan_sample` date DEFAULT NULL,
+  `metode_pengambilan_sample` varchar(50) DEFAULT NULL,
+  `kondisi_sample` int(1) DEFAULT NULL,
+  `target_pengujian_id` int(5) NOT NULL,
+  `nama_customer` varchar(70) DEFAULT NULL,
+  `alamat` text,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `kode_sample_UNIQUE` (`kode_sample`),
+  KEY `fk_tbl_sample_hewan_1_idx` (`target_pengujian_id`),
+  CONSTRAINT `fk_tbl_sample_hewan_1` FOREIGN KEY (`target_pengujian_id`) REFERENCES `tbl_target_pengujian` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_sample_hewan`
+--
+
+LOCK TABLES `tbl_sample_hewan` WRITE;
+/*!40000 ALTER TABLE `tbl_sample_hewan` DISABLE KEYS */;
+INSERT INTO `tbl_sample_hewan` VALUES (1,'SH-4106','Sample Hewan','Umbi',3,'GRM','2018-05-23','Random',1,1,'Nama Customer Hewan','Alamat Customer Hewan','2018-05-29 19:12:42',NULL);
+/*!40000 ALTER TABLE `tbl_sample_hewan` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbl_sample_tumbuhan`
 --
 
@@ -603,4 +690,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-30  0:47:01
+-- Dump completed on 2018-05-30  2:46:12

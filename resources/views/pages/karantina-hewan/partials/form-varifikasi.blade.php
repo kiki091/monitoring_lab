@@ -1,4 +1,4 @@
-<form action="{{ route('cms_karantina_tumbuhan_confirm') }}" method="POST" id="form__verifikasi_karantina_tumbuhan" enctype="multipart/form-data" @submit.prevent>
+<form action="{{ route('cms_karantina_hewan_confirm') }}" method="POST" id="form__verifikasi_karantina_hewan" enctype="multipart/form-data" @submit.prevent>
 	<div class="main__content__form__layer" id="toggle-form-verifikasi-content" style="display: none; margin-top: 5%;">
 		<div class="create__form__wrapper">
 			<div class="form--top flex-between">

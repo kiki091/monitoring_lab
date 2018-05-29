@@ -66,7 +66,7 @@
 			<p class="header_text">Telp : 0542-418994, Fax : 0542-418994, Email : bkpbpn@gmail.com</p>
 		</div>
 	</div>
-	<p class="title_pages">TANDA TERIMA DISTRIBUSI SAMPLE KARANTINA TUMBUHAN</p>
+	<p class="title_pages">TANDA TERIMA DISTRIBUSI SAMPLE KARANTINA HEWAN</p>
 	<table class="table_header" cellpadding="1" cellspacing="0" style="margin-bottom: 10px;">
 		<tbody>
 		<tr>

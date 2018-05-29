@@ -174,11 +174,20 @@ function menu_hasil_laboratorium()
 }
 // JAVASCRIPT 
 
-function menu_verifikasi_permohonan()
+function menu_verifikasi_tumbuhan()
 {
     $('.right_col').load(laroute.route('cms_karantina_tumbuhan_varifikasi', []), function()
     {
-        init_verifikasi_permohonan()
+        init_verifikasi_tumbuhan()
+    });
+}
+// JAVASCRIPT 
+
+function menu_verifikasi_hewan()
+{
+    $('.right_col').load(laroute.route('cms_karantina_hewan_varifikasi', []), function()
+    {
+        init_verifikasi_hewan()
     });
 }
 // JAVASCRIPT 
@@ -188,5 +197,23 @@ function menu_korfug()
     $('.right_col').load(laroute.route('cms_korfug_index', []), function()
     {
         init_korfug()
+    });
+}
+// JAVASCRIPT 
+
+function menu_sample_hewan()
+{
+    $('.right_col').load(laroute.route('cms_sample_hewan_index', []), function()
+    {
+        init_sample_hewan()
+    });
+}
+// JAVASCRIPT 
+
+function menu_karantina_hewan()
+{
+    $('.right_col').load(laroute.route('cms_karantina_hewan_index', []), function()
+    {
+        init_karantina_hewan()
     });
 }

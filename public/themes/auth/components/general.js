@@ -552,11 +552,22 @@ function init_hasil_laboratorium()
     initChoosen();
 }
 
-function init_verifikasi_permohonan()
+function init_verifikasi_tumbuhan()
 {
     mainGeneral();
     wizardSlide();
-    crud_verifikasi_permohonan();
+    crud_verifikasi_tumbuhan();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    initChoosen();
+}
+
+function init_verifikasi_hewan()
+{
+    mainGeneral();
+    wizardSlide();
+    crud_verifikasi_hewan();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
@@ -568,6 +579,28 @@ function init_korfug()
     mainGeneral();
     wizardSlide();
     crud_korfug();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    initChoosen();
+}
+
+function init_sample_hewan()
+{
+    mainGeneral();
+    wizardSlide();
+    crud_sample_hewan();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    initChoosen();
+}
+
+function init_karantina_hewan()
+{
+    mainGeneral();
+    wizardSlide();
+    crud_karantina_hewan();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();

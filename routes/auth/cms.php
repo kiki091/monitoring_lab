@@ -22,6 +22,17 @@ Route::group(['prefix' => 'karantina-tumbuhan'], function () {
 	Route::get('print', 'KarantinaTumbuhanController@print')->name('cms_karantina_tumbuhan_print_terima_sample');
 });
 
+Route::group(['prefix' => 'karantina-hewan'], function () {
+
+	Route::get('/', 'KarantinaHewanController@index')->name('cms_karantina_hewan_index');
+	Route::get('data', 'KarantinaHewanController@getData')->name('cms_karantina_hewan_data');
+	Route::post('store', 'KarantinaHewanController@store')->name('cms_karantina_hewan_store');
+	Route::post('edit', 'KarantinaHewanController@edit')->name('cms_karantina_hewan_edit');
+	Route::get('varifikasi', 'KarantinaHewanController@varifikasi')->name('cms_karantina_hewan_varifikasi');
+	Route::post('confirm', 'KarantinaHewanController@confirm')->name('cms_karantina_hewan_confirm');
+	Route::get('print', 'KarantinaHewanController@print')->name('cms_karantina_hewan_print_terima_sample');
+});
+
 Route::group(['prefix' => 'korfug'], function () {
 
 	Route::get('/', 'KorfugController@index')->name('cms_korfug_index');
@@ -38,6 +49,14 @@ Route::group(['prefix' => 'sample-tumbuhan'], function () {
 	Route::get('data', 'SampleTumbuhanController@getData')->name('cms_sample_tumbuhan_data');
 	Route::post('store', 'SampleTumbuhanController@store')->name('cms_sample_tumbuhan_store');
 	Route::post('edit', 'SampleTumbuhanController@edit')->name('cms_sample_tumbuhan_edit');
+});
+
+Route::group(['prefix' => 'sample-hewan'], function () {
+
+	Route::get('/', 'SampleHewanController@index')->name('cms_sample_hewan_index');
+	Route::get('data', 'SampleHewanController@getData')->name('cms_sample_hewan_data');
+	Route::post('store', 'SampleHewanController@store')->name('cms_sample_hewan_store');
+	Route::post('edit', 'SampleHewanController@edit')->name('cms_sample_hewan_edit');
 });
 
 Route::group(['prefix' => 'master-data'], function () {
