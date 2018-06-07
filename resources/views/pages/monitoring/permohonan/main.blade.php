@@ -9,13 +9,13 @@
 	</div>
     <div class="col-md-12 col-sm-12 col-xs-12">
     	<!-- Include form -->
-    	<form action="" method="POST" id="ExperienceActivities" enctype="multipart/form-data" @submit.prevent>
-			<div class="main__content__form__layer" id="toggle-activities-content" style="">
+    	<form action="{{ route('cms_master_permohonan_store') }}" method="POST" id="form__master_permohonan" enctype="multipart/form-data" @submit.prevent>
+			<div class="main__content__form__layer" id="toggle-form-content" style="display: none;">
 				<div class="create__form__wrapper">
 					<div class="form--top flex-between">
 						<div class="form__title">@{{ form_add_title }}</div>
 						<div class="form--top__btn">
-							<a href="#" class="btn__add__cancel">Cancel</a>
+							<a href="#" class="btn__add__cancel" @click="resetForm">Cancel</a>
 						</div>
 					</div>
 
@@ -46,7 +46,7 @@
 											<div class="new__form__field">
 												<label>Jenis Karantina</label>
 												<div class="field__icon">
-													<select name="type_permohonan" class="form-control" id="type_permohonan" v-model="type_permohonan_selector">
+													<select name="type_permohonan" class="new__form__input__field" id="type_permohonan" v-model="type_permohonan_selector">
 														<option v-for="type_permohonan in list_type_permohonan" :value="type_permohonan.id">@{{ type_permohonan.name }}</option>
 													</select>
 												</div>
@@ -58,7 +58,7 @@
 											<div class="new__form__field">
 												<label>Kategori Uji</label>
 												<div class="field__icon">
-													<select name="kategori_uji_id" class="form-control" id="kategori_uji_id" v-model="kategori_selector">
+													<select name="kategori_uji_id" class="new__form__input__field" id="kategori_uji_id" v-model="kategori_selector">
 														<option v-for="kategori in list_kategori" :value="kategori.id">@{{ kategori.nama_kategori }}</option>
 													</select>
 												</div>
@@ -70,7 +70,7 @@
 											<div class="new__form__field">
 												<label>Asal Kegiatan</label>
 												<div class="field__icon">
-													<select name="kegiatan_id" class="form-control" id="kegiatan_id" v-model="kegiatan_selector">
+													<select name="kegiatan_id" class="new__form__input__field" id="kegiatan_id" v-model="kegiatan_selector">
 														<option v-for="kegiatan in list_kegiatan" :value="kegiatan.id">@{{ kegiatan.nama_kegiatan }}</option>
 													</select>
 												</div>
@@ -81,7 +81,7 @@
 											<div class="new__form__field">
 												<label>Asal Negara</label>
 												<div class="field__icon">
-													<select name="negara_id" class="form-control" id="negara_id" v-model="negara_selector">
+													<select name="negara_id" class="new__form__input__field" id="negara_id" v-model="negara_selector">
 														<option v-for="negara in list_negara" :value="negara.id">@{{ negara.nama_negara }}</option>
 													</select>
 												</div>
@@ -92,7 +92,7 @@
 											<div class="new__form__field">
 												<label>Asal UPT / Wilker</label>
 												<div class="field__icon">
-													<select name="upt_id" class="form-control" id="upt_id" v-model="upt_selector">
+													<select name="upt_id" class="new__form__input__field" id="upt_id" v-model="upt_selector">
 														<option v-for="upt in list_upt" :value="upt.id">@{{ upt.nama_upt }}</option>
 													</select>
 												</div>
@@ -103,7 +103,7 @@
 											<div class="new__form__field">
 												<label>Asal Daerah</label>
 												<div class="field__icon">
-													<select name="daerah_id" class="form-control" id="daerah_id" v-model="daerah_selector">
+													<select name="daerah_id" class="new__form__input__field" id="daerah_id" v-model="daerah_selector">
 														<option v-for="daerah in list_daerah" :value="daerah.id">@{{ daerah.nama_daerah }}</option>
 													</select>
 												</div>
@@ -116,7 +116,7 @@
 											<div class="new__form__field">
 												<label>Nama Petugas</label>
 												<div class="field__icon">
-													<select name="dokter_hewan_id" class="form-control" id="dokter_hewan_id" v-model="dokter_selector">
+													<select name="dokter_hewan_id" class="new__form__input__field" id="dokter_hewan_id" v-model="dokter_selector">
 														<option v-for="dokter in list_dokter" :value="dokter.id">@{{ dokter.nama_lengkap }}</option>
 													</select>
 												</div>
@@ -138,7 +138,7 @@
 											<div class="new__form__field">
 												<label>Nama Perusahaan / Pemilik / Penuh / Kuasa</label>
 												<div class="field__icon">
-													<select name="perusahaan_id" class="form-control" id="perusahaan_id" v-model="perusahaan_selector">
+													<select name="perusahaan_id" class="new__form__input__field" id="perusahaan_id" v-model="perusahaan_selector">
 														<option v-for="perusahaan in list_perusahaan" :value="perusahaan.id">@{{ perusahaan.nama_perusahaan }}</option>
 													</select>
 												</div>
@@ -149,7 +149,7 @@
 											<div class="new__form__field">
 												<label>Nama Pemilik / Penuh / Kuasa</label>
 												<div class="field__icon">
-													<input type="text" name="nama_pemilik" class="form-control" v-model="models.nama_pemilik" id="nama_pemilik">
+													<input type="text" name="nama_pemilik" class="new__form__input__field" v-model="models.nama_pemilik" id="nama_pemilik">
 												</div>
 												<div class="form--error--message--left" id="form--error--message--nama_pemilik"></div>
 											</div>
@@ -159,7 +159,7 @@
 											<div class="new__form__field">
 												<label>Alamat Pemilik / Penuh / Kuasa</label>
 												<div class="field__icon">
-													<textarea name="alamat_pemilik" id="alamat_pemilik" class="form-control" v-model="models.alamat_pemilik"></textarea>
+													<textarea style="margin: 0px; width: 575px; height: 206px;" name="alamat_pemilik" id="alamat_pemilik" class="new__form__input__field" v-model="models.alamat_pemilik"></textarea>
 												</div>
 												<div class="form--error--message--left" id="form--error--message--alamat_pemilik"></div>
 											</div>
@@ -202,7 +202,7 @@
 											<div class="new__form__field">
 												<label>Upload Dokumen</label>
 												<div class="field__icon">
-													<input v-model="dokument_pendukung" name="dokument_pendukung" type="file" id="dokument_pendukung" class="form-control">
+													<input v-model="dokument_pendukung" name="dokument_pendukung" type="file" id="dokument_pendukung" class="new__form__input__field">
 												</div>
 												<div class="form--error--message--left" id="form--error--message--dokument_pendukung"></div>
 											</div>
@@ -244,7 +244,7 @@
 											<div class="new__form__field">
 												<label>Nama Pengantar</label>
 												<div class="field__icon">
-													<input v-model="models.nama_pengirim" name="nama_pengirim" type="text" id="nama_pengirim" class="form-control">
+													<input v-model="models.nama_pengirim" name="nama_pengirim" type="text" id="nama_pengirim" class="new__form__input__field">
 												</div>
 												<div class="form--error--message--left" id="form--error--message--nama_pengirim"></div>
 											</div>
@@ -261,7 +261,7 @@
 											<div class="new__form__field">
 												<label>Tgl Terima Sample</label>
 												<div class="field__icon">
-													<input v-model="models.tgl_terima_sample" name="tgl_terima_sample" type="text" id="tgl_terima_sample" class="form-control">
+													<input v-model="models.tgl_terima_sample" name="tgl_terima_sample" type="date" id="tgl_terima_sample" class="new__form__input__field">
 												</div>
 												<div class="form--error--message--left" id="form--error--message--tgl_terima_sample"></div>
 											</div>
@@ -270,7 +270,7 @@
 											<div class="new__form__field">
 												<label>NIP Petugas Penerima</label>
 												<div class="field__icon">
-													<input v-model="models.nip_petugas_penerima" name="nip_petugas_penerima" type="date" id="nip_petugas_penerima" class="form-control">
+													<input v-model="models.nip_petugas_penerima" name="nip_petugas_penerima" type="text" id="nip_petugas_penerima" class="new__form__input__field">
 												</div>
 												<div class="form--error--message--left" id="form--error--message--nip_petugas_penerima"></div>
 											</div>
@@ -290,139 +290,50 @@
 								<div class="create__form__row">
 									<div class="new__form__field">
 										<label>Search data</label>
-										<div class="field__icon">
-											<input v-model="search_by_kode_sample" name="kode_sample" type="text" id="kode_sample" class="form-control" placeholder="KST-319.263">
-										</div>
-										<div class="form--error--message--left" id="form--error--message--nama_sample"></div>
+										<input v-model="search_by_kode_sample" name="kode_sample" type="text" id="kode_sample" class="field__search__function" placeholder="Kode sample atau nama sample">
 									</div>
 								</div>
-								<hr class="line" />
-								<table class="table__style">
-									<thead>
-										<th>#</th>
-										<th>Kode Sample</th>
-										<th>Nama Sample</th>
-										<th>Jenis Sample</th>
-										<th>Nama Komoditas</th>
-										<th>Jumlah Vol</th>
-										<th>Satuan</th>
-										<th>Tanggal Pengambilan</th>
-						    			<th>Metode Pengambilan</th>
-						    			<th>Kondisi Sample</th>
-						    			<th>Target Pengujian</th>
-						    			<th>Nama Customer / Pemilik</th>
-									</thead>
-									<tbody>
-										<tr v-for="(sample, index) in list_sample">
-											<td>
-												<input type="checkbox" :name="'sample_id['+index+']'" v-model="sample_selected[index]" @click="sample_choices(index,sample.id)">
-											</td>
-						    				<td>@{{ sample.kode_sample }}</td>
-						    				<td>@{{ sample.nama_sample }}</td>
-						    				<td>@{{ sample.jenis_sample }}</td>
-						    				<td>@{{ sample.nama_komoditas }}</td>
-						    				<td>@{{ sample.jml_vol }}</td>
-						    				<td>@{{ sample.satuan }}</td>
-						    				<td>@{{ sample.tgl_pengambilan_sample }}</td>
-						    				<td>@{{ sample.metode_pengambilan_sample }}</td>
-						    				<td>
-						    					<template v-if="sample.kondisi_sample == 1">
-						    						Baik
-						    					</template>
-						    					<template v-if="sample.kondisi_sample == 0">
-						    						Buruk
-						    					</template>
-						    				</td>
-						    				<td>@{{ sample.target_pengujian }}</td>
-						    				<td>@{{ sample.nama_customer }}</td>
-						    			</tr>
-									</tbody>
-								</table>
-							</div>
-							<hr class="line" />
-							<div class="create__form__row">
-								<span class="form__group__title">Tambah Sample<a href="javascript:void(0);" class="style__accordion" data-accordion="form-accordion-tambah-sample"><i>@include('svg-logo.ico-expand-arrow')</i></a></span>
-							</div>
-							<div id="form-accordion-tambah-sample" style="display: block;">
 								<div class="create__form__row">
-									<table id="table__pemakaian__bahan" align="center" class="table__style">
-										<thead>
-											<tr>
-												<th>Nama Sample</th>
-								    			<th>Jenis Sample</th>
-								    			<th>Nama Komoditas</th>
-								    			<th>Jumlah Vol</th>
-								    			<th>Satuan</th>
-								    			<th>Tanggal Pengambilan</th>
-								    			<th>Metode Pengambilan</th>
-								    			<th>Kondisi Sample</th>
-								    			<th>Target Pengujian</th>
-								    			<th>Nama Customer / Pemilik</th>
-								    			<th>Alamat Customer / Pemilik</th>
-												<th>
-													<a href="javascript::void()" class="btn__add__cancel" @click="addMoreData">Add</a>
-												</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr v-for="(total_data, index) in default_total_sample_data">
-												<td>
-													<input v-model="sample.nama_sample[index]" :name="'nama_sample['+index+']'" type="text" :id="'nama_sample_'+index" class="nama_sample new__form__input__field width_100">
-													<div class="form--error--message--left" :id="'form--error--message--nama_sample-'+index"></div>
-												</td>
-												<td>
-													<input v-model="sample.jenis_sample[index]" :name="'jenis_sample['+index+']'" type="text" :id="'jenis_sample_'+index" class="jenis_sample new__form__input__field width_100">
-													<div class="form--error--message--left" :id="'form--error--message--jenis_sample-'+index"></div>
-												</td>
-												<td>
-													<input v-model="sample.nama_komoditas[index]" :name="'nama_komoditas['+index+']'" type="text" :id="'nama_komoditas_'+index" class="nama_komoditas new__form__input__field width_100">
-													<div class="form--error--message--left" :id="'form--error--message--nama_komoditas-'+index"></div>
-												</td>
-												<td>
-													<input v-model="sample.jml_vol[index]" :name="'jml_vol['+index+']'" type="text" :id="'jml_vol_'+index" class="jml_vol new__form__input__field width_100">
-													<div class="form--error--message--left" :id="'form--error--message--jml_vol-'+index"></div>
-												</td>
-												<td>
-													<select v-model="sample.satuan_id[index]" :name="'satuan_id['+index+']'" :id="'satuan_id_'+index" class="satuan_id new__form__input__field width_100">
-														<option v-for="satuan in list_satuan" :value="satuan.id">@{{ satuan.nama_satuan }}</option>
-													</select>
-
-													<div class="form--error--message--left" :id="'form--error--message--satuan_id-'+index"></div>
-												</td>
-												<td>
-													<input v-model="sample.tgl_pengambilan_sample[index]" :name="'tgl_pengambilan_sample['+index+']'" type="text" :id="'tgl_pengambilan_sample_'+index" class="tgl_pengambilan_sample new__form__input__field width_100">
-													<div class="form--error--message--left" :id="'form--error--message--tgl_pengambilan_sample-'+index"></div>
-												</td>
-												<td>
-													<input v-model="sample.metode_pengambilan_sample[index]" :name="'metode_pengambilan_sample['+index+']'" type="text" :id="'metode_pengambilan_sample_'+index" class="metode_pengambilan_sample new__form__input__field width_100">
-													<div class="form--error--message--left" :id="'form--error--message--metode_pengambilan_sample-'+index"></div>
-												</td>
-												<td>
-													<input v-model="sample.kondisi_sample[index]" :name="'kondisi_sample['+index+']'" type="text" :id="'kondisi_sample_'+index" class="kondisi_sample new__form__input__field width_100">
-													<div class="form--error--message--left" :id="'form--error--message--kondisi_sample-'+index"></div>
-												</td>
-												<td>
-													<select v-model="sample.target_pengujian_id[index]" :name="'target_pengujian_id['+index+']'" :id="'target_pengujian_id_'+index" class="target_pengujian_id new__form__input__field width_100">
-														<option v-for="target in list_target" :value="target.id">@{{ target.nama_target_pengujian }}</option>
-													</select>
-
-													<div class="form--error--message--left" :id="'form--error--message--target_pengujian_id-'+index"></div>
-												</td>
-												<td>
-													<input v-model="sample.nama_customer[index]" :name="'nama_customer['+index+']'" type="text" :id="'nama_customer_'+index" class="nama_customer new__form__input__field width_100">
-													<div class="form--error--message--left" :id="'form--error--message--nama_customer-'+index"></div>
-												</td>
-												<td>
-													<textarea v-model="sample.alamat[index]" :name="'alamat['+index+']'" :id="'alamat_'+index" class="alamat new__form__input__field width_100"></textarea>
+									<div class="moving--check">
+										<div class="moving--check--table">
+											<div class="new--table__header">
+												<span>SAMPLE TERPILIH</span>
+											</div>
+											<div class="table-test">
+												<div class="bg--placeholder">
+													@include('svg-logo.ico-max3')
+													<p>Pilih beberapa sample yang ada di daftar</p>
+												</div>
+												
+												<ul id="ul-checked">
+												</ul>
+											</div>
+										</div>
+										<div class="moving--check--checkbox">
+											<div class="new--checkbox__header">
+												<span>DAFTAR SAMPLE</span>
+											</div>
+											<div class="test__list__checkbox checkbox-test">
+												<ul>
+													<li v-for="(sample, idx) in list_sample" v-if="edit == false" :id="'list-sample['+sample.id+']'">
+														<div class="form--checkbox__wrapper">
+															<span class="priority"></span>
+															<input type="checkbox" :id="'checkbox-en-'+idx" class="checkbox--input" name="sample_id[]" :value="sample.id">
+															<label :for="'checkbox-en-'+idx" class="checkbox--label">@{{ sample.nama_sample }}</label>
+															<div class="handle">
+																<span class="handle-bar1"></span>
+																<span class="handle-bar2"></span>
+																<span class="handle-bar3"></span>
+															</div>
+														</div>
+													</li>
 													
-													<div class="form--error--message--left" :id="'form--error--message--alamat-'+index"></div>
-												</td>
-												<td>
-													<a href="javascript::void()" class="btn__add__cancel" @click="deleteMoreData(index)">Delete</a>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="form--error--message" id="form--error--message--sample_id"></div>
+									
 								</div>
 							</div>
 						</div>
@@ -461,7 +372,7 @@
 									<div class="new__form__field">
 										<label>Lama Uji (Hari)</label>
 										<div class="field__icon">
-											<input type="text" name="lama_uji" id="lama_uji" class="form-control" v-model="pengujian.lama_uji" placeholder="Enter here">
+											<input type="text" name="lama_uji" id="lama_uji" class="new__form__input__field" v-model="pengujian.lama_uji" placeholder="Enter here">
 										</div>
 										<div class="form--error--message--left" id="form--error--message--target_pest_id"></div>
 									</div>
@@ -490,5 +401,44 @@
 			</div>
 		</form>
     	<!-- / End include form -->
+    	<div class="main__content__layer">
+			<div class="content__top flex-between">
+				<div class="content__title">
+					<h2>DAFTAR PERMOHONAN</h2>
+				</div>
+				<div class="content__btn">
+					<a href="#" class="btn__add" id="toggle-form">Add Data</a>
+		       	</div>
+		    </div>
+		    <div class="content__bottom">
+		    	<table class="table">
+		    		<thead>
+		    			<tr>
+			    			<th>#</th>
+			    			<th>Tanggal Permohonan</th>
+			    			<th>No Agenda</th>
+			    			<th>No Permohonan</th>
+			    			<th>Jenis Karantina</th>
+			    			<th>Kategori Uji</th>
+			    			<th>Tgl Terima Sample</th>
+			    			<th>Nama Pengirim</th>
+			    			<th>Status</th>
+			    		</tr>
+		    		</thead>
+		    		<tbody>
+		    			<tr>
+		    				<td></td>
+		    				<td></td>
+		    				<td></td>
+		    				<td></td>
+		    				<td></td>
+		    				<td></td>
+		    				<td></td>
+		    				<td></td>
+		    				<td></td>
+		    			</tr>
+		    		</tbody>
+		    </div>
+		</div>
     </div>
 </div>

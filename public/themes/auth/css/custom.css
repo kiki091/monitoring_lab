@@ -5436,7 +5436,9 @@ input, textarea, select {
     transition: all .2s;
     padding-left: 20px;
 }
-
+.form--checkbox__wrapper .checkbox--input:checked+.checkbox--label:before {
+    border: 1px solid #627f8f;
+}
 .form--checkbox__wrapper .checkbox--input + .checkbox--label:before {
     content: '';
     display: inline-block;
@@ -5449,7 +5451,18 @@ input, textarea, select {
     top: 3px;
     text-align: center;
 }
-
+.form--checkbox__wrapper .checkbox--input:checked+.checkbox--label:after {
+    position: absolute;
+    content: "";
+    margin: auto;
+    background: url(/cms/images/ico-check.svg) top no-repeat;
+    background-size: 17px 16px;
+    width: 17px;
+    height: 16px;
+    top: 0;
+    left: 1px;
+    transform: translateX(0);
+}
 .form--checkbox__wrapper .checkbox--input:disabled + .checkbox--label {
     color: #aaa;
 }
@@ -5475,8 +5488,8 @@ input, textarea, select {
     background-size: 17px 16px;
     width: 17px;
     height: 16px;
-    top: 0px;
-    left: 1px;
+    top: 5px;
+    left: 10px;
     transform: translateX(0px);
 }
 
@@ -5776,4 +5789,176 @@ table.table__style tr th {
 .form--wizard--tab .wizard--tab--ul .wizard--tab--li .wizard--tab--link {
     font-size: 12px;
     position: relative;
+}
+.moving--check {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+}
+.moving--check--table {
+    width: 230px;
+}
+.moving--check--table .new--table__header {
+    font-size: 12px;
+    color: #627f8f;
+    padding: 10px;
+    background: #f3f4f6;
+    border-bottom: 1px solid rgba(97,127,143,.3);
+}
+.moving--check--table .table-test {
+    position: relative;
+    z-index: 0;
+}
+
+.moving--check--table .bg--placeholder {
+    position: absolute;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+.table-test ul {
+    position: relative;
+    overflow: hidden;
+}
+.moving--check--table ul {
+    min-height: 160px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    background: #f3f4f6;
+}
+.table-test ul li {
+    position: relative!important;
+    top: 0!important;
+}
+.moving--check--table ul li {
+    position: relative;
+    animation: slideFadeIn .5s;
+}
+.moving--check .form--checkbox__wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 35px;
+    margin-left: 10px;
+}
+.form--checkbox__wrapper {
+    position: relative;
+    z-index: 2;
+}
+.priority, .priority-edit {
+    display: none;
+}
+.form--checkbox__wrapper .checkbox--input {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+}
+.moving--check .table-test .form--checkbox__wrapper label {
+    white-space: nowrap;
+    width: calc(100% - 48px);
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.moving--check .form--checkbox__wrapper label {
+    transition: all .2s;
+}
+.moving--check--table ul li .handle {
+    position: absolute;
+    right: 8px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 14px;
+    height: 16px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: move;
+}
+.handle {
+    cursor: move;
+}
+.moving--check--table .rooms__page .list__drag__boxed ul li .handle .handle-bar1, .moving--check--table .rooms__page .list__drag__boxed ul li .handle .handle-bar3, .moving--check--table ul li .handle .handle-bar1, .moving--check--table ul li .handle .handle-bar2, .moving--check--table ul li .handle .handle-bar3, .rooms__page .list__drag__boxed .moving--check--table ul li .handle .handle-bar1, .rooms__page .list__drag__boxed .moving--check--table ul li .handle .handle-bar3 {
+    width: 14px;
+    height: 2px;
+    background-color: #9b9b9b;
+    display: block;
+    position: relative;
+}
+.moving--check--table ul li .handle .handle-bar1 {
+    top: -3px;
+}
+.moving--check--checkbox {
+    width: calc(100% - 230px);
+    padding: 0 0 0 20px;
+}
+.moving--check--checkbox .new--checkbox__header {
+    font-size: 12px;
+    color: #627f8f;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 9px 10px 8px;
+    border: 1px solid #f3f4f6;
+}
+.moving--check--checkbox .test__list__checkbox {
+    border: 1px solid #f3f4f6;
+    border-top: none;
+}
+.moving--check--checkbox .test__list__checkbox ul {
+    min-height: 162px;
+}
+.moving--check--checkbox .test__list__checkbox ul li {
+    animation: fadeIn .5s;
+    display: inline-block;
+    width: 220px;
+}
+.moving--check--checkbox .checkbox--label {
+    color: #9b9b9b;
+}
+.form--checkbox__wrapper .checkbox--input+.checkbox--label:before {
+    content: '';
+    display: inline-block;
+    vertical-align: sub;
+    border: 1px solid #d5d5d5;
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    transform: translateX(-20px);
+    top: 8px;
+    text-align: center;
+}
+.content__form .content__form__row label {
+    line-height: 20px;
+}
+.field__search__function {
+    border: 1px solid #f0f0f0;
+}
+.field__search__function {
+    height: 28px;
+    margin-right: 15px;
+    width: 188px;
+    background: url(/themes/auth/svg/ico-luv.svg) no-repeat left 5px center;
+    padding: 3px 4px 3px 22px;
+    font-size: 11px;
 }

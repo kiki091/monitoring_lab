@@ -109,7 +109,7 @@ class PermohonanController extends BaseController
      */
 
     public function store(Request $request)
-    {
+    {dd($request->all());
         $validator = Validator::make($request->all(), $this->validation($request));
 
         if ($validator->fails()) {

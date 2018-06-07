@@ -130,16 +130,17 @@ class Sample extends BaseImplementation implements SampleInterface
     {
     	$daftarSample = SampleModel::with(['satuan','target_pengujian'])->orderBy('created_at', $orderType);
 
-        if(isset($params['id'])) {
+        if(isset($params['id']) && !empty($params['id'])) {
             $daftarSample->where('id', $params['id']);
         }
 
-        if(isset($params['limit_data'])) {
-            $daftarSample->take(1, 10);
+        if(isset($params['limit_data']) && !empty($params['limit_data'])) {
+            $daftarSample->take(1, 20);
         }
 
-        if(isset($params['kode_sample'])) {
+        if(isset($params['kode_sample']) && !empty($params['kode_sample'])) {
             $daftarSample->where('kode_sample', 'like', '%'.$params['kode_sample'].'%');
+            $daftarSample->orWhere('nama_sample', 'like', '%'.$params['kode_sample'].'%');
         }
 
         if(!$daftarSample->count())

@@ -645,4 +645,5 @@ function init_master_permohonan()
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
+    moveCheck();
 }

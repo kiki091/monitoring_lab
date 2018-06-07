@@ -374,14 +374,66 @@ function crud_permohonan() {
 
             resetForm: function() {
 
-                this.models.id = ''
-                this.models.kode_permohonan = ''
-                this.models.nama_permohonan = ''
-                this.form_add_title = "List Data permohonan"
-                //$('#nama_lab').val().trigger("chosen:updated")
+                this.daerah_selector = ''
+                this.dokter_selector = ''
+                this.kategori_selector = ''
+                this.kegiatan_selector = ''
+                this.negara_selector = ''
+                this.perusahaan_selector = ''
+                this.sample_selected = ''
+                this.satuan_selector = ''
+                this.search_by_kode_sample = ''
+                this.target_pest_selector = ''
+                this.target_selector = ''
+                this.target_uji_golongan_selector = ''
+                this.type_permohonan_selector = ''
+                this.upt_selector = ''
+                this.dokument_pendukung = ''
 
-                this.clearErrorMessage()
+                this.pengujian.id = ''
+                this.pengujian.lama_uji = ''
+                this.pengujian.permohonan_id = ''
+                this.pengujian.target_pest_id = ''
+                this.pengujian.target_uji_golongan_id = ''
+
+                this.models.id = ''
+                this.models.alamat_pemilik = ''
+                this.models.daerah_id = ''
+                this.models.dokter_hewan_id = ''
+                this.models.dokument_pendukung = ''
+                this.models.kategori_uji_id = ''
+                this.models.kegiatan_id = ''
+                this.models.lampiran_hasil_uji = '0'
+                this.models.nama_pemilik = ''
+                this.models.nama_pengirim = ''
+                this.models.negara_id = ''
+                this.models.nip_petugas_penerima = ''
+                this.models.pengiriman_sample = ''
+                this.models.tgl_terima_sample = ''
+                this.models.type_permohonan = ''
+                this.models.upt_id = ''
+                
+                this.show_negara = true,
+                this.show_upt = true,
+                this.show_daerah = true,
+                this.show_perusahaan = true,
+                this.show_nama_pemilik = true,
+                this.show_alamat_pemilik = true,
                 this.edit = false
+                
+                $('#daerah_id').val('').trigger("chosen:updated")
+                $('#dokter_hewan_id').val('').trigger("chosen:updated")
+                $('#kategori_uji_id').val('').trigger("chosen:updated")
+                $('#kegiatan_id').val('').trigger("chosen:updated")
+                $('#negara_id').val('').trigger("chosen:updated")
+                $('#perusahaan_id').val('').trigger("chosen:updated")
+                $('#satuan_id').val('').trigger("chosen:updated")
+                $('#target_pest_id').val('').trigger("chosen:updated")
+                $('#target_uji_golongan_id').val('').trigger("chosen:updated")
+                $('#type_permohonan').val('').trigger("chosen:updated")
+
+                this.initChoosen()
+                this.clearErrorMessage()
             },
 
             clearErrorMessage: function() {
