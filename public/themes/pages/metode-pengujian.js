@@ -18,35 +18,57 @@ function crud_metode_pengujian() {
 
             models: {
                 id:'',
-                nama_kelompok: '',
+                nama_metode_pengujian: '',
+                target_pengujian_id: '',
+                laboratorium_id: '',
+                kelompok_metode_pengujian_id: '',
             },
             data: {},
             list_laboratorium: {},
-            list_target_pengujian: {},
-            list_kelompok_pengujian: {},
+            list_target: {},
+            list_kelompok: {},
+
             laboratorium_selector: '',
             target_selector: '',
             kelompok_selector: '',
-            form_add_title: "List Metode Pengujian",
+            form_add_title: "List Data Metode Pengujian",
             edit: false,
+        },
+
+        watch: {
+
+            list_target: _.debounce(function() {
+              var elem = $(this.$el).find('#target_pengujian_id');
+              elem.val(this.target_selector)
+              elem.trigger("chosen:updated"); 
+            },500),
+            
+            list_laboratorium: _.debounce(function() {
+              var elem = $(this.$el).find('#laboratorium_id');
+              elem.val(this.laboratorium_selector)
+              elem.trigger("chosen:updated"); 
+            },500),
+            
+            list_kelompok: _.debounce(function() {
+              var elem = $(this.$el).find('#kelompok_metode_pengujian_id');
+              elem.val(this.kelompok_selector)
+              elem.trigger("chosen:updated"); 
+            },500),
         },
 
         methods: {
 
             fetchData: function() {
                 var vm = this
-                var domain  = laroute.route('cms_metode_pengujian_data', []);
+                var domain  = laroute.route('cms_master_metode_pengujian_data', []);
                 
                 this.$http.get(domain).then(function (response) {
                     response = response.data
-                    if(response.status == true) {
-                        vm.data = response.data.list_data
-                        vm.list_laboratorium = response.data.list_lab
-                        vm.list_target_pengujian = response.data.list_target
-                        vm.list_kelompok_pengujian = response.data.list_kelompok
-                    } else {
-                        pushNotif(response.status, response.message)
-                    }
+                    vm.list_laboratorium = response.data.list_laboratorium
+                    vm.list_target = response.data.list_target
+                    vm.list_kelompok = response.data.list_kelompok
+                    vm.data = response.data.list_data
+                    
                 })
             },
 
@@ -90,8 +112,8 @@ function crud_metode_pengujian() {
 
                 };
 
-                $("#form__metode_pengujian").ajaxForm(optForm);
-                $("#form__metode_pengujian").submit();
+                $("#form__master_metode_pengujian").ajaxForm(optForm);
+                $("#form__master_metode_pengujian").submit();
             },
 
             editData: function(id) {
@@ -99,6 +121,8 @@ function crud_metode_pengujian() {
                 this.edit = true
                 this.checkFunctions = []          
                 var payload = []
+                var vm = this
+
                 payload['id'] = id
                 payload['_token'] = token
 
@@ -108,16 +132,21 @@ function crud_metode_pengujian() {
                     form.append(key, payload[key])
                 }
 
-                var domain  = laroute.route('cms_metode_pengujian_edit', []);
+                var domain  = laroute.route('cms_master_metode_pengujian_edit', []);
                 this.$http.post(domain, form).then(function(response) {
-
+                    
                     if (response.status) {
-                        this.models = response.data;
-                        this.laboratorium_selector = response.data.laboratorium_id;
-                        this.target_selector = response.data.target_pengujian_id;
-                        this.kelompok_selector = response.data.kelompok_uji_id;
+                        vm.models = response.data
+                        vm.target_selector = response.data.target_pengujian_id
+                        vm.laboratorium_selector = response.data.laboratorium_id
+                        vm.kelompok_selector = response.data.kelompok_metode_pengujian_id
+
+                        $('#target_pengujian_id').val(response.data.target_pengujian_id).trigger("chosen:updated");
+                        $('#laboratorium_id').val(response.data.laboratorium_id).trigger("chosen:updated");
+                        $('#kelompok_metode_pengujian_id').val(response.data.kelompok_metode_pengujian_id).trigger("chosen:updated");
 
                         $('#toggle-form-content').slideDown('swing')
+                        
                     } else {
                         pushNotif(response.status,response.message)
                     }
@@ -127,12 +156,20 @@ function crud_metode_pengujian() {
             resetForm: function() {
 
                 this.models.id = ''
-                this.models.nama_kelompok = ''
-                this.laboratorium_selector = ''
+                this.models.nama_metode_pengujian = ''
+                this.models.target_pengujian_id = ''
+                this.models.laboratorium_id = ''
+                this.models.kelompok_metode_pengujian_id = ''
+
                 this.target_selector = ''
+                this.laboratorium_selector = ''
                 this.kelompok_selector = ''
-                
-                this.form_add_title = "List Target Pengujian"
+                this.form_add_title = "List Data Metode Pengujian"
+
+                $('#target_pengujian_id').val("").trigger("chosen:updated");
+                $('#laboratorium_id').val("").trigger("chosen:updated");
+                $('#kelompok_metode_pengujian_id').val("").trigger("chosen:updated");
+
                 this.clearErrorMessage()
                 this.edit = false
             },
@@ -141,9 +178,40 @@ function crud_metode_pengujian() {
                 $(".form--error--message--left").text('')
             },
 
+            initChoosen: function() {
+
+                var vm = this
+                $("#target_pengujian_id").chosen({    
+                    width: "100%",    
+                    disable_search: false,
+                    theme: "dark"
+                }).change(function() {
+                    vm.target_selector = this.value
+
+                }).trigger("chosen:updated");
+
+                $("#laboratorium_id").chosen({    
+                    width: "100%",    
+                    disable_search: false,
+                    theme: "dark"
+                }).change(function() {
+                    vm.laboratorium_selector = this.value
+                }).trigger("chosen:updated");
+
+                $("#kelompok_metode_pengujian_id").chosen({    
+                    width: "100%",    
+                    disable_search: false,
+                    theme: "dark"
+                }).change(function() {
+                    vm.kelompok_selector = this.value
+                }).trigger("chosen:updated");
+            }
+
         },
         mounted: function () {
+
             this.fetchData();
+            this.initChoosen();
         }
 
     });

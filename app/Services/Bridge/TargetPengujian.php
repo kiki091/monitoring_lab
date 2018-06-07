@@ -7,13 +7,13 @@ use App\Repositories\Contracts\TargetPengujian as TargetPengujianInterface;
 class TargetPengujian {
 
     /**
-     * @var TargetPengujianInterface
+     * @var Target Pengujian Interface
      */
-    protected $targetPengujian;
+    protected $daftarTargetPengujian;
 
-    public function __construct(TargetPengujianInterface $targetPengujian)
+    public function __construct(TargetPengujianInterface $daftarTargetPengujian)
     {
-        $this->targetPengujian = $targetPengujian;
+        $this->daftarTargetPengujian = $daftarTargetPengujian;
     }
 
     /**
@@ -22,7 +22,7 @@ class TargetPengujian {
      */
     public function getData($params = array())
     {
-        return $this->targetPengujian->getData($params);
+        return $this->daftarTargetPengujian->getData($params);
     }
 
     /**
@@ -31,7 +31,7 @@ class TargetPengujian {
      */
     public function store($params = array())
     {
-        return $this->targetPengujian->store($params);
+        return $this->daftarTargetPengujian->store($params);
     }
 
     /**
@@ -40,6 +40,6 @@ class TargetPengujian {
      */
     public function edit($params = array())
     {
-        return $this->targetPengujian->edit($params);
+        return $this->daftarTargetPengujian->edit($params);
     }
 } 

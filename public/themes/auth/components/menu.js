@@ -30,38 +30,38 @@ function menuSubNavigation()
 
 // JAVASCRIPT USER ACCOUNT MANAGER
 
-function user_account()
+function user_administrator()
 {
     $('.right_col').load(laroute.route('CmsUserAccount', []), function()
     {
-    	init_user_account()
+    	init_user_administrator()
     });
 }
 // JAVASCRIPT 
 
-function menu_karantina_tumbuhan()
+function menu_master_daerah()
 {
-    $('.right_col').load(laroute.route('cms_karantina_tumbuhan_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_daerah_index', []), function()
     {
-        init_karantina_tumbuhan()
+        init_master_daerah()
     });
 }
 // JAVASCRIPT 
 
-function menu_sample_tumbuhan()
+function menu_master_jabatan()
 {
-    $('.right_col').load(laroute.route('cms_sample_tumbuhan_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_jabatan_index', []), function()
     {
-        init_sample_tumbuhan()
+        init_master_jabatan()
     });
 }
 // JAVASCRIPT 
 
-function menu_master_upt()
+function menu_master_kel_metode_pengujian()
 {
-    $('.right_col').load(laroute.route('cms_master_upt_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_kel_metode_pengujian_index', []), function()
     {
-        init_master_upt()
+        init_master_kel_metode_pengujian()
     });
 }
 // JAVASCRIPT 
@@ -75,29 +75,92 @@ function menu_master_laboratorium()
 }
 // JAVASCRIPT 
 
-function menu_master_daftar_daerah()
+function menu_master_target_pengujian()
 {
-    $('.right_col').load(laroute.route('cms_master_daftar_daerah_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_target_pengujian_index', []), function()
     {
-        init_master_daftar_daerah()
+        init_master_target_pengujian()
     });
 }
 // JAVASCRIPT 
 
-function menu_master_kegiatan()
+function menu_master_metode_pengujian()
 {
-    $('.right_col').load(laroute.route('cms_master_kegiatan_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_metode_pengujian_index', []), function()
     {
-        init_master_kegiatan()
+        init_master_metode_pengujian()
     });
 }
 // JAVASCRIPT 
 
-function menu_master_kategori()
+function menu_master_pegawai()
 {
-    $('.right_col').load(laroute.route('cms_master_kategori_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_pegawai_index', []), function()
     {
-        init_master_kategori()
+        init_master_pegawai()
+    });
+}
+// JAVASCRIPT 
+
+function menu_master_kode_hs()
+{
+    $('.right_col').load(laroute.route('cms_master_kode_hs_index', []), function()
+    {
+        init_master_kode_hs()
+    });
+}
+// JAVASCRIPT 
+
+function menu_master_kelompok_sample()
+{
+    $('.right_col').load(laroute.route('cms_master_kelompok_sample_index', []), function()
+    {
+        init_master_kelompok_sample()
+    });
+}
+// JAVASCRIPT 
+
+function menu_master_satuan()
+{
+    $('.right_col').load(laroute.route('cms_master_satuan_index', []), function()
+    {
+        init_master_satuan()
+    });
+}
+// JAVASCRIPT 
+
+function menu_master_upt()
+{
+    $('.right_col').load(laroute.route('cms_master_upt_index', []), function()
+    {
+        init_master_upt()
+    });
+}
+// JAVASCRIPT 
+
+function menu_master_target_uji_golongan()
+{
+    $('.right_col').load(laroute.route('cms_master_target_uji_golongan_index', []), function()
+    {
+        init_master_target_uji_golongan()
+    });
+}
+// JAVASCRIPT 
+
+function menu_master_target_pest()
+{
+    $('.right_col').load(laroute.route('cms_master_target_pest_index', []), function()
+    {
+        init_master_target_pest()
+    });
+}
+// JAVASCRIPT 
+
+function menu_master_jenis_pengujian()
+{
+    $('.right_col').load(laroute.route('cms_master_jenis_pengujian_index', []), function()
+    {
+        init_master_jenis_pengujian()
     });
 }
 // JAVASCRIPT 
@@ -111,109 +174,64 @@ function menu_master_perusahaan()
 }
 // JAVASCRIPT 
 
-function menu_master_dokter()
+function menu_master_negara()
 {
-    $('.right_col').load(laroute.route('cms_master_dokter_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_negara_index', []), function()
     {
-        init_master_dokter()
+        init_master_negara()
     });
 }
 // JAVASCRIPT 
 
-function menu_target_pengujian()
+function menu_master_media_transpor()
 {
-    $('.right_col').load(laroute.route('cms_target_pengujian_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_media_transpor_index', []), function()
     {
-        init_target_pengujian()
+        init_master_media_transpor()
     });
 }
 // JAVASCRIPT 
 
-function menu_metode_pengujian()
+function menu_master_kegiatan()
 {
-    $('.right_col').load(laroute.route('cms_metode_pengujian_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_kegiatan_index', []), function()
     {
-        init_metode_pengujian()
+        init_master_kegiatan()
     });
 }
 // JAVASCRIPT 
 
-function menu_daftar_pengujian()
+function menu_master_dokter_hewan()
 {
-    $('.right_col').load(laroute.route('cms_daftar_pengujian_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_dokter_hewan_index', []), function()
     {
-        init_daftar_pengujian()
+        init_master_dokter_hewan()
     });
 }
 // JAVASCRIPT 
 
-function menu_kelompok_pengujian()
+function menu_master_kategori()
 {
-    $('.right_col').load(laroute.route('cms_kelompok_pengujian_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_kategori_index', []), function()
     {
-        init_kelompok_pengujian()
+        init_master_kategori()
     });
 }
 // JAVASCRIPT 
 
-function menu_penugasan()
+function menu_master_sample()
 {
-    $('.right_col').load(laroute.route('cms_penugasan_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_sample_index', []), function()
     {
-        init_penugasan()
+        init_master_sample()
     });
 }
 // JAVASCRIPT 
 
-function menu_hasil_laboratorium()
+function menu_master_permohonan()
 {
-    $('.right_col').load(laroute.route('cms_hasil_laboratorium_index', []), function()
+    $('.right_col').load(laroute.route('cms_master_permohonan_index', []), function()
     {
-        init_hasil_laboratorium()
-    });
-}
-// JAVASCRIPT 
-
-function menu_verifikasi_tumbuhan()
-{
-    $('.right_col').load(laroute.route('cms_karantina_tumbuhan_varifikasi', []), function()
-    {
-        init_verifikasi_tumbuhan()
-    });
-}
-// JAVASCRIPT 
-
-function menu_verifikasi_hewan()
-{
-    $('.right_col').load(laroute.route('cms_karantina_hewan_varifikasi', []), function()
-    {
-        init_verifikasi_hewan()
-    });
-}
-// JAVASCRIPT 
-
-function menu_korfug()
-{
-    $('.right_col').load(laroute.route('cms_korfug_index', []), function()
-    {
-        init_korfug()
-    });
-}
-// JAVASCRIPT 
-
-function menu_sample_hewan()
-{
-    $('.right_col').load(laroute.route('cms_sample_hewan_index', []), function()
-    {
-        init_sample_hewan()
-    });
-}
-// JAVASCRIPT 
-
-function menu_karantina_hewan()
-{
-    $('.right_col').load(laroute.route('cms_karantina_hewan_index', []), function()
-    {
-        init_karantina_hewan()
+        init_master_permohonan()
     });
 }

@@ -157,6 +157,7 @@
 			<div class="form--bot">
 				<div class="create__form">
 					<div class="create__form__row flex-between">
+						<div class=""></div>
 						<div class="new__form__btn">
 							<input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
 							<input v-model="models.id" v-if="edit == true" type="hidden" name="id">

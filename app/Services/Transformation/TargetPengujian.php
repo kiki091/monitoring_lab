@@ -43,9 +43,8 @@ class TargetPengujian
             return [
 
                 'id'                => isset($data['id']) ? $data['id'] : '',
-                'nama_target'       => isset($data['nama_target']) ? $data['nama_target'] : '',
-                'target_hph'       => isset($data['target_hph']) ? $data['target_hph'] : '',
-                'keterangan'       => isset($data['keterangan']) ? $data['keterangan'] : '',
+                'nama_target_pengujian'       => isset($data['nama_target_pengujian']) ? $data['nama_target_pengujian'] : '',
+                
             ];
 
         },$data);
@@ -56,9 +55,7 @@ class TargetPengujian
     protected function setSingleDataTransform($data)
     {
         $objData['id'] = isset($data['id']) ? $data['id'] : '';
-        $objData['nama_target'] = isset($data['nama_target']) ? $data['nama_target'] : '';
-        $objData['target_hph'] = isset($data['target_hph']) ? $data['target_hph'] : '';
-        $objData['keterangan'] = isset($data['keterangan']) ? $data['keterangan'] : '';
+        $objData['nama_target_pengujian'] = isset($data['nama_target_pengujian']) ? $data['nama_target_pengujian'] : '';
 
         return $objData;
     }

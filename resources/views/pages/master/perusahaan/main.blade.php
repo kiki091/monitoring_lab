@@ -26,8 +26,10 @@
 		    			<tr>
 			    			<th>#</th>
 			    			<th>Kode Perusahaan</th>
-			    			<th>Nama Perusahaan</th>
+			    			<th>Nama Pemilik / Perusahaan</th>
+			    			<th>Alamat</th>
 			    			<th>Nomer Telpon</th>
+			    			<th>Contact Person</th>
 			    			<th>Option</th>
 			    		</tr>
 		    		</thead>
@@ -37,7 +39,9 @@
 		    				<td>@{{ index+1 }}</td>
 		    				<td>@{{ obj.kode_perusahaan }}</td>
 		    				<td>@{{ obj.nama_perusahaan }}</td>
+		    				<td>@{{ obj.alamat }}</td>
 		    				<td>@{{ obj.no_telpon }}</td>
+		    				<td>@{{ obj.contact_person }}</td>
 		    				<td>
 		    					<a href="#" @click="editData(obj.id)">Edit</a>
 		    				</td>

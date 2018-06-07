@@ -378,115 +378,66 @@ function initSubMenuNavigation()
 }
 
 // INIT FUNCTION USER ACCOUNT MANAGEMENT CMS
-function init_user_account()
+function init_user_administrator()
 {
     mainGeneral();
-    crud_user_account();
+    crud_user_administrator();
     buttonClickOpen();
     buttonClickClose();
     masonry(2500);
     masonryAdminNavigation(2500);
 }
 
-function init_karantina_tumbuhan()
-{
-    mainGeneral();
-    wizardSlide();
-    crud_karantina_tumbuhan();
-    buttonClickOpen();
-    buttonClickClose();
-    replaceToCkEditor();
-}
 
-function init_sample_tumbuhan()
+function init_master_daerah()
 {
     mainGeneral();
     wizardSlide();
-    crud_sample_tumbuhan();
+    crud_daerah();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
 }
 
-function init_master_upt()
+
+function init_master_jabatan()
 {
     mainGeneral();
     wizardSlide();
-    crud_master_upt();
+    crud_jabatan();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
 }
+
+
+function init_master_kel_metode_pengujian()
+{
+    mainGeneral();
+    wizardSlide();
+    crud_kel_metode_pengujian();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    initChoosen();
+}
+
 
 function init_master_laboratorium()
 {
     mainGeneral();
     wizardSlide();
-    crud_master_laboratorium();
+    crud_laboratorium();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
 }
 
-function init_master_daftar_daerah()
-{
-    mainGeneral();
-    wizardSlide();
-    crud_master_daftar_daerah();
-    buttonClickOpen();
-    buttonClickClose();
-    replaceToCkEditor();
-    initChoosen();
-}
 
-function init_master_kegiatan()
-{
-    mainGeneral();
-    wizardSlide();
-    crud_master_kegiatan();
-    buttonClickOpen();
-    buttonClickClose();
-    replaceToCkEditor();
-    initChoosen();
-}
-
-function init_master_kategori()
-{
-    mainGeneral();
-    wizardSlide();
-    crud_master_kategori();
-    buttonClickOpen();
-    buttonClickClose();
-    replaceToCkEditor();
-    initChoosen();
-}
-
-function init_master_perusahaan()
-{
-    mainGeneral();
-    wizardSlide();
-    crud_master_perusahaan();
-    buttonClickOpen();
-    buttonClickClose();
-    replaceToCkEditor();
-    initChoosen();
-}
-
-function init_master_dokter()
-{
-    mainGeneral();
-    wizardSlide();
-    crud_master_dokter();
-    buttonClickOpen();
-    buttonClickClose();
-    replaceToCkEditor();
-    initChoosen();
-}
-
-function init_target_pengujian()
+function init_master_target_pengujian()
 {
     mainGeneral();
     wizardSlide();
@@ -497,7 +448,8 @@ function init_target_pengujian()
     initChoosen();
 }
 
-function init_metode_pengujian()
+
+function init_master_metode_pengujian()
 {
     mainGeneral();
     wizardSlide();
@@ -508,99 +460,187 @@ function init_metode_pengujian()
     initChoosen();
 }
 
-function init_daftar_pengujian()
+
+function init_master_pegawai()
 {
     mainGeneral();
     wizardSlide();
-    crud_daftar_pengujian();
+    crud_pegawai();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
 }
 
-function init_kelompok_pengujian()
+
+function init_master_kode_hs()
 {
     mainGeneral();
     wizardSlide();
-    crud_kelompok_pengujian();
+    crud_kode_hs();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
 }
 
-function init_penugasan()
+
+function init_master_kelompok_sample()
 {
     mainGeneral();
     wizardSlide();
-    crud_penugasan();
+    crud_kelompok_sample();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
 }
 
-function init_hasil_laboratorium()
+
+function init_master_satuan()
 {
     mainGeneral();
     wizardSlide();
-    crud_hasil_laboratorium();
+    crud_satuan();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
 }
 
-function init_verifikasi_tumbuhan()
+
+function init_master_upt()
 {
     mainGeneral();
     wizardSlide();
-    crud_verifikasi_tumbuhan();
+    crud_upt();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
 }
 
-function init_verifikasi_hewan()
+
+function init_master_target_uji_golongan()
 {
     mainGeneral();
     wizardSlide();
-    crud_verifikasi_hewan();
+    crud_target_uji_golongan();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
 }
 
-function init_korfug()
+
+function init_master_target_pest()
 {
     mainGeneral();
     wizardSlide();
-    crud_korfug();
+    crud_target_pest();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
 }
 
-function init_sample_hewan()
+
+function init_master_jenis_pengujian()
 {
     mainGeneral();
     wizardSlide();
-    crud_sample_hewan();
+    crud_jenis_pengujian();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
     initChoosen();
 }
 
-function init_karantina_hewan()
+
+function init_master_perusahaan()
 {
     mainGeneral();
     wizardSlide();
-    crud_karantina_hewan();
+    crud_perusahaan();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    initChoosen();
+}
+
+
+function init_master_negara()
+{
+    mainGeneral();
+    wizardSlide();
+    crud_negara();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    initChoosen();
+}
+
+
+function init_master_media_transpor()
+{
+    mainGeneral();
+    wizardSlide();
+    crud_media_transpor();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    initChoosen();
+}
+
+function init_master_kegiatan()
+{
+    mainGeneral();
+    wizardSlide();
+    crud_kegiatan();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    initChoosen();
+}
+
+function init_master_dokter_hewan()
+{
+    mainGeneral();
+    wizardSlide();
+    crud_dokter_hewan();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    initChoosen();
+}
+
+function init_master_kategori()
+{
+    mainGeneral();
+    wizardSlide();
+    crud_kategori();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    initChoosen();
+}
+
+function init_master_sample()
+{
+    mainGeneral();
+    wizardSlide();
+    crud_sample();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    initChoosen();
+}
+
+function init_master_permohonan()
+{
+    mainGeneral();
+    wizardSlide();
+    crud_permohonan();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();

@@ -15,84 +15,36 @@
 								<span class="form__group__title">General Information<a href="javascript:void(0);" class="style__accordion" data-accordion="form-accordion-1"><i>@include('svg-logo.ico-expand-arrow')</i></a></span>
 							</div>
 							<div id="form-accordion-1" style="display: block;">
-								<div class="create__form__row">
 
+								<div class="create__form__row">
 									<div class="new__form__field">
-										<label>Nama Upt</label>
+										<label>Nama UPT</label>
 										<div class="field__icon">
 											<input v-model="models.nama_upt" name="nama_upt" type="text" id="nama_upt" class="form-control" placeholder="Enter here">
 										</div>
 										<div class="form--error--message--left" id="form--error--message--nama_upt"></div>
 									</div>
+								</div>
 
-									<div class="new__form__field">
-										<label>Kelas Upt</label>
-										<div class="field__icon">
-											<input v-model="models.kelas_upt" name="kelas_upt" type="text" id="kelas_upt" class="form-control" placeholder="Enter here">
-										</div>
-										<div class="form--error--message--left" id="form--error--message--kelas_upt"></div>
-									</div>
-
-									<div class="new__form__field">
-										<label>Nama Laboratorium</label>
-										<div class="field__icon">
-											<select class="form-control" id="lab_id" name="lab_id" v-model="lab_selector">
-												<option :selected="lab_selector == obj.id" v-for="obj in list_lab" :value="obj.id">@{{ obj.nama_laboratorium }}</option>
-											</select>
-										</div>
-										<div class="form--error--message--left" id="form--error--message--lab_id"></div>
-									</div>
-
-									<div class="new__form__field">
-										<label>Jenis Pelabuhan</label>
-										<div class="field__icon">
-											<select class="form-control" id="jns_pelabuhan" name="jns_pelabuhan" v-model="pelabuhan_selector">
-												<option :selected="pelabuhan_selector == obj_pelabuhan.id" v-for="obj_pelabuhan in list_pelabuhan" :value="obj_pelabuhan.id">@{{ obj_pelabuhan.name }}</option>
-											</select>
-										</div>
-										<div class="form--error--message--left" id="form--error--message--jns_pelabuhan"></div>
-									</div>
-
+								<div class="create__form__row">
 									<div class="new__form__field">
 										<label>Daerah</label>
 										<div class="field__icon">
-											<select class="form-control" id="daerah_id" name="daerah_id" v-model="daerah_selector">
-												<option :selected="daerah_selector == obj_daerah.id" v-for="obj_daerah in list_daerah" :value="obj_daerah.id">@{{ obj_daerah.nama_daerah }}</option>
+											<select name="daerah_id" class="form-control" id="daerah_id" v-model="daerah_selector">
+												<option v-for="list_daerah in list_daerah" :value="list_daerah.id">@{{ list_daerah.nama_daerah }}</option>
 											</select>
 										</div>
 										<div class="form--error--message--left" id="form--error--message--daerah_id"></div>
 									</div>
+								</div>
 
+								<div class="create__form__row">
 									<div class="new__form__field">
-										<label>Alamat</label>
+										<label>Jenis Pelabuhan</label>
 										<div class="field__icon">
-											<textarea class="form-control" name="alamat" id="alamat" v-model="models.alamat"></textarea>
+											<input v-model="models.jenis_pelabuhan" name="jenis_pelabuhan" type="text" id="jenis_pelabuhan" class="form-control" placeholder="Enter here">
 										</div>
-										<div class="form--error--message--left" id="form--error--message--alamat"></div>
-									</div>
-
-									<div class="new__form__field">
-										<label>Nomer Telpon</label>
-										<div class="field__icon">
-											<input v-model="models.no_tlp" name="no_tlp" type="text" id="no_tlp" class="form-control" placeholder="Enter here">
-										</div>
-										<div class="form--error--message--left" id="form--error--message--no_tlp"></div>
-									</div>
-
-									<div class="new__form__field">
-										<label>Nomer Fax</label>
-										<div class="field__icon">
-											<input v-model="models.no_fax" name="no_fax" type="text" id="no_fax" class="form-control" placeholder="Enter here">
-										</div>
-										<div class="form--error--message--left" id="form--error--message--no_fax"></div>
-									</div>
-
-									<div class="new__form__field">
-										<label>Email</label>
-										<div class="field__icon">
-											<input v-model="models.email" name="email" type="text" id="email" class="form-control" placeholder="Enter here">
-										</div>
-										<div class="form--error--message--left" id="form--error--message--email"></div>
+										<div class="form--error--message--left" id="form--error--message--jenis_pelabuhan"></div>
 									</div>
 								</div>
 							</div>

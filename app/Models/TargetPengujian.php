@@ -12,7 +12,11 @@ class TargetPengujian extends BaseModel
 
     protected $fillable = [
         'id',
-        'nama_target'
+        'nama_target_pengujian',
+    ];
+    
+    protected $hidden = [
+        'remember_token',
     ];
 
     /**
@@ -20,24 +24,15 @@ class TargetPengujian extends BaseModel
      *
      * @var array
      */
-    protected $hidden = [
-        'remember_token',
-    ];
 
     protected $guarded = [];
-    
-    public function metode_pengujian()
-    {
-        return $this->belongsTo('App\Models\MetodePengujian', 'id', 'target_pengujian_id');
-    }
-
 
     /***************** Scope *****************/
 
     /**
      * @param $query
      */
-    public function scopeUserId($query, $params = true)
+    public function scopeId($query, $params = true)
     {
         return $query->where('id', $params);
     }

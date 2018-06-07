@@ -124,11 +124,11 @@ function datePicker(){
             language: 'en',
             dateFormat: 'yyyy-mm-dd',
             navTitles: {days: 'MM <i>yyyy</i>'},
-            autoClose: true,
+            autoClose: false,
             toggleSelected: false,
             minDate: new Date()
             
-        }).focus();
+        })
     });
     $(document).on('click', '.date-icon', function(){
         $(this).parent('.input-icon').find('.datepick').datepicker({
@@ -592,6 +592,7 @@ function wizardSlide(){
   $('.wizard--tab ul').append('<li class="slide-line"></li>');
 
   $(document).on('click', '.wizard--tab li a', function () {
+    console.log("xccc")
     /* slide tab wizard */
     var $this = $(this).parent('li'),
     offset = $this.offset(),

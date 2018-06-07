@@ -42,11 +42,13 @@ class MetodePengujian
 
             return [
 
-                'id'                => isset($data['id']) ? $data['id'] : '',
-                'nama_kelompok'     => isset($data['nama_kelompok']) ? $data['nama_kelompok'] : '',
-                'laboratorium'     => isset($data['lab']['nama_laboratorium']) ? $data['lab']['nama_laboratorium'] : '',
-                'target_pengujian'     => isset($data['target_pengujian']['nama_target']) ? $data['target_pengujian']['nama_target'] : '',
-                'kelompok_pengujian'     => isset($data['kelompok_pengujian']['nama_kelompok']) ? $data['kelompok_pengujian']['nama_kelompok'] : '',
+                'id'                       => isset($data['id']) ? $data['id'] : '',
+                'nama_metode_pengujian'    => isset($data['nama_metode_pengujian']) ? $data['nama_metode_pengujian'] : '',
+                'target_pengujian'         => isset($data['target_pengujian']) ? $data['target_pengujian']['nama_target_pengujian'] : '',
+                'laboratorium'             => isset($data['laboratorium']) ? $data['laboratorium']['nama_laboratorium'] : '',
+                'kode_kelompok'            => isset($data['kelompok_metode_pengujian']) ? $data['kelompok_metode_pengujian']['kode_kelompok'] : '',
+                'nama_kelompok'            => isset($data['kelompok_metode_pengujian']) ? $data['kelompok_metode_pengujian']['nama_kelompok'] : '',
+                
             ];
 
         },$data);
@@ -56,11 +58,11 @@ class MetodePengujian
 
     protected function setSingleDataTransform($data)
     {
-        $objData['id'] = isset($data['id']) ? $data['id'] : '';
-        $objData['nama_kelompok'] = isset($data['nama_kelompok']) ? $data['nama_kelompok'] : '';
-        $objData['target_pengujian_id'] = isset($data['target_pengujian_id']) ? $data['target_pengujian_id'] : '';
-        $objData['laboratorium_id'] = isset($data['laboratorium_id']) ? $data['laboratorium_id'] : '';
-        $objData['kelompok_uji_id'] = isset($data['kelompok_uji_id']) ? $data['kelompok_uji_id'] : '';
+        $objData['id']                           = isset($data['id']) ? $data['id'] : '';
+        $objData['nama_metode_pengujian']        = isset($data['nama_metode_pengujian']) ? $data['nama_metode_pengujian'] : '';
+        $objData['target_pengujian_id']          = isset($data['target_pengujian_id']) ? $data['target_pengujian_id'] : '';
+        $objData['laboratorium_id']              = isset($data['laboratorium_id']) ? $data['laboratorium_id'] : '';
+        $objData['kelompok_metode_pengujian_id'] = isset($data['kelompok_metode_pengujian_id']) ? $data['kelompok_metode_pengujian_id'] : '';
 
         return $objData;
     }

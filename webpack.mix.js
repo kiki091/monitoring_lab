@@ -48,6 +48,7 @@ mix.scripts([
     'public/js/bower_components/bootstrap-clockpicker/bootstrap-clockpicker.js',
     'public/js/bower_components/masonry/dist/masonry.pkgd.js',
     'public/js/bower_components/chosen/chosen.jquery.js',
+    'public/js/bower_components/iodash/lodash.js',
 ], 'public/themes/auth/build/js/plugins.js');
 
 mix.scripts([

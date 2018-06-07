@@ -37,7 +37,7 @@ CREATE TABLE `menu` (
   UNIQUE KEY `slug_UNIQUE` (`slug`),
   UNIQUE KEY `url_UNIQUE` (`url`),
   KEY `fk_menu_1_idx` (`menu_group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (23,'User Account','user-account','user_account()',2,0,1,1,NULL,NULL),(24,'Karantina Tumbuhan','karantina-tumbuhan','menu_karantina_tumbuhan()',1,0,1,2,NULL,NULL),(25,'Sample Tumbuhan','sample-tumbuhan','menu_sample_tumbuhan()',1,0,1,3,NULL,NULL),(26,'Unit Pelaksanaan Teknis','unit-pelaksanaan-teknis','menu_master_upt()',3,0,1,4,NULL,NULL),(27,'Laboratorium','laboratorium','menu_master_laboratorium()',3,0,1,5,NULL,NULL),(28,'Daftar Daerah','daftar-daerah','menu_master_daftar_daerah()',3,0,1,5,NULL,NULL),(29,'Kegiatan','kegiatan','menu_master_kegiatan()',3,0,1,6,NULL,NULL),(30,'Kategori','kategori','menu_master_kategori()',3,0,1,7,NULL,NULL),(31,'Perusahaan','perusahaan','menu_master_perusahaan()',3,0,1,8,NULL,NULL),(32,'Dokter','dokter','menu_master_dokter()',3,0,1,9,NULL,NULL),(33,'Target Pengujian','target-pengujian','menu_target_pengujian()',3,0,1,10,NULL,NULL),(34,'Metode Pengujian','metode-pengujian','menu_metode_pengujian()',3,0,1,11,NULL,NULL),(35,'Daftar Pengujian','daftar-pengujian','menu_daftar_pengujian()',3,0,1,12,NULL,NULL),(36,'Kelompok Pengujian','kelompok-pengujian','menu_kelompok_pengujian()',3,0,1,13,NULL,NULL),(37,'Penugasan','penugasan','menu_penugasan()',1,0,1,14,NULL,NULL),(38,'Hasil Pemeriksaan','hasil-pemeriksaan','menu_hasil_laboratorium()',1,0,1,15,NULL,NULL),(39,'Verifikasi Karantina Tumbuhan','verifikasi-karantina-tumbuhan','menu_verifikasi_tumbuhan()',1,0,1,16,NULL,NULL),(40,'Koordinator Fungsional','koordinator-fungsional','menu_korfug()',1,0,1,17,NULL,NULL),(41,'Karantina Hewan','karantina-hewan','menu_karantina_hewan()',1,0,1,18,NULL,NULL),(42,'Sample Hewan','sample-hewan','menu_sample_hewan()',1,0,1,19,NULL,NULL),(43,'Verifikasi Karantina Hewan','verifikasi-karantina-hewan','menu_verifikasi_hewan()',1,0,1,20,NULL,NULL);
+INSERT INTO `menu` VALUES (23,'User Administrator','user-administrartor','user_administrator()',2,0,1,1,NULL,NULL),(44,'Daerah','daerah','menu_master_daerah()',3,0,1,2,NULL,NULL),(45,'Jabatan','jabatan','menu_master_jabatan()',3,0,1,3,NULL,NULL),(46,'Kelompok Metode Pengujian','kelompok-metode-pengujian','menu_master_kel_metode_pengujian()',3,0,1,4,NULL,NULL),(47,'Laboratorium','laboratorium','menu_master_laboratorium()',3,0,1,5,NULL,NULL),(48,'Target Pengujian','target-pengujian','menu_master_target_pengujian()',3,0,1,6,NULL,NULL),(49,'Metode Pengujian','metode-pengujian','menu_master_metode_pengujian()',3,0,1,7,NULL,NULL),(50,'Pegawai','pegawai','menu_master_pegawai()',3,0,1,8,NULL,NULL),(51,'Kode HS','kode-hs','menu_master_kode_hs()',3,0,1,9,NULL,NULL),(52,'Kelompok Sample','kelompok-sample','menu_master_kelompok_sample()',3,0,1,10,NULL,NULL),(53,'Satuan','satuan','menu_master_satuan()',3,0,1,11,NULL,NULL),(54,'Upt','upt','menu_master_upt()',3,0,1,12,NULL,NULL),(55,'Target Uji Golongan','target-uji-golongan','menu_master_target_uji_golongan()',3,0,1,13,NULL,NULL),(56,'Target Pest','target-pest','menu_master_target_pest()',3,0,1,14,NULL,NULL),(57,'Jenis Pengujian','jenis-pengujian','menu_master_jenis_pengujian()',3,0,1,15,NULL,NULL),(58,'Perusahaan','perusahaan','menu_master_perusahaan()',3,0,1,16,NULL,NULL),(59,'Negara','negara','menu_master_negara()',3,0,1,17,NULL,NULL),(60,'Media Transpor','media-transpor','menu_master_media_transpor()',3,0,1,18,NULL,NULL),(61,'Kegiatan','kegiatan','menu_master_kegiatan()',3,0,1,19,NULL,NULL),(62,'Dokter Hewan','dokter-hewan','menu_master_dokter_hewan()',3,0,1,20,NULL,NULL),(64,'Kategori','kategori','menu_master_kategori()',3,0,1,22,NULL,NULL),(65,'Daftar Sample','sample','menu_master_sample()',1,0,1,23,NULL,NULL),(66,'Permohonan','permohonan','menu_master_permohonan()',1,0,1,24,NULL,NULL);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -247,7 +247,7 @@ CREATE TABLE `user_menu` (
   KEY `fk_user_menu_2_idx` (`menu_id`),
   CONSTRAINT `fk_user_menu_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_user_menu_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=258 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=579 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,7 +256,7 @@ CREATE TABLE `user_menu` (
 
 LOCK TABLES `user_menu` WRITE;
 /*!40000 ALTER TABLE `user_menu` DISABLE KEYS */;
-INSERT INTO `user_menu` VALUES (237,1,28),(238,1,35),(239,1,32),(240,1,30),(241,1,29),(242,1,36),(243,1,27),(244,1,34),(245,1,31),(246,1,33),(247,1,26),(248,1,38),(249,1,40),(250,1,37),(251,1,41),(252,1,24),(253,1,42),(254,1,25),(255,1,43),(256,1,39),(257,1,23);
+INSERT INTO `user_menu` VALUES (556,1,44),(557,1,62),(558,1,45),(559,1,57),(560,1,64),(561,1,61),(562,1,46),(563,1,52),(564,1,51),(565,1,47),(566,1,60),(567,1,49),(568,1,59),(569,1,50),(570,1,58),(571,1,53),(572,1,48),(573,1,56),(574,1,55),(575,1,54),(576,1,65),(577,1,66),(578,1,23);
 /*!40000 ALTER TABLE `user_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,7 +287,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','sheqbo@gmail.com','$2y$10$HID2BFqetjGlJQQ5biCpXuSMTqQfbU.EqeS/2ARWU0A7v7WzIT59i','sj19pbIhO8lwa8mYSyFgJQ2im1XjsXNDMWwXxdqxiKxwBoGcRtZfT0t2bfcF',1,'2017-05-04 09:58:53','2018-05-29 09:24:07');
+INSERT INTO `users` VALUES (1,'admin','sheqbo@gmail.com','$2y$10$HID2BFqetjGlJQQ5biCpXuSMTqQfbU.EqeS/2ARWU0A7v7WzIT59i','0GI5iQB7xP7VR7Er1qD1oDjDeSzFUeqOXmsQEhMyIAdYHT4L8uNQz2KqwJsw',1,'2017-05-04 09:58:53','2018-05-29 09:24:07');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -300,4 +300,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-30  2:46:32
+-- Dump completed on 2018-06-07 19:42:12

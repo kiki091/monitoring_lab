@@ -12,40 +12,38 @@ class MetodePengujian extends BaseModel
 
     protected $fillable = [
         'id',
-        'nama_kelompok'
+        'target_pengujian_id',
+        'nama_metode_pengujian',
+        'laboratorium_id',
+        'kelompok_metode_pengujian_id',
     ];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
+    
     protected $hidden = [
         'remember_token',
     ];
 
-    protected $guarded = [];
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    
-    public function lab()
-    {
-        return $this->belongsTo('App\Models\MasterLaboraorium', 'laboratorium_id', 'id');
-    }
+
+    protected $guarded = [];
     
     public function target_pengujian()
     {
         return $this->belongsTo('App\Models\TargetPengujian', 'target_pengujian_id', 'id');
     }
     
-    public function kelompok_pengujian()
+    public function laboratorium()
     {
-        return $this->belongsTo('App\Models\KelompokPengujian', 'kelompok_uji_id', 'id');
+        return $this->belongsTo('App\Models\Laboratorium', 'laboratorium_id', 'id');
     }
-
+    
+    public function kelompok_metode_pengujian()
+    {
+        return $this->belongsTo('App\Models\KelompokMetodePengujian', 'kelompok_metode_pengujian_id', 'id');
+    }
 
     /***************** Scope *****************/
 

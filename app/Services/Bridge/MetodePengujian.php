@@ -7,13 +7,13 @@ use App\Repositories\Contracts\MetodePengujian as MetodePengujianInterface;
 class MetodePengujian {
 
     /**
-     * @var MetodePengujianInterface
+     * @var Metode Pengujian Interface
      */
-    protected $metodePengujian;
+    protected $daftarMetodePengujian;
 
-    public function __construct(MetodePengujianInterface $metodePengujian)
+    public function __construct(MetodePengujianInterface $daftarMetodePengujian)
     {
-        $this->metodePengujian = $metodePengujian;
+        $this->daftarMetodePengujian = $daftarMetodePengujian;
     }
 
     /**
@@ -22,7 +22,7 @@ class MetodePengujian {
      */
     public function getData($params = array())
     {
-        return $this->metodePengujian->getData($params);
+        return $this->daftarMetodePengujian->getData($params);
     }
 
     /**
@@ -31,7 +31,7 @@ class MetodePengujian {
      */
     public function store($params = array())
     {
-        return $this->metodePengujian->store($params);
+        return $this->daftarMetodePengujian->store($params);
     }
 
     /**
@@ -40,6 +40,6 @@ class MetodePengujian {
      */
     public function edit($params = array())
     {
-        return $this->metodePengujian->edit($params);
+        return $this->daftarMetodePengujian->edit($params);
     }
 } 

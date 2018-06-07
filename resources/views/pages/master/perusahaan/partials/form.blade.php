@@ -18,27 +18,44 @@
 								<div class="create__form__row">
 
 									<div class="new__form__field">
-										<label>Nama Perusahaan</label>
+										<label>Nama Pemilik / Perusahaan</label>
 										<div class="field__icon">
 											<input v-model="models.nama_perusahaan" name="nama_perusahaan" type="text" id="nama_perusahaan" class="form-control" placeholder="Enter here">
 										</div>
 										<div class="form--error--message--left" id="form--error--message--nama_perusahaan"></div>
 									</div>
+								</div>
+
+								<div class="create__form__row">
 
 									<div class="new__form__field">
-										<label>No Telpon Perusahaan</label>
+										<label>Alamat</label>
 										<div class="field__icon">
-											<input v-model="models.no_telpon" name="no_telpon" type="text" id="no_telpon" class="form-control" placeholder="Enter here">
+											<textarea v-model="models.alamat" name="alamat" id="alamat" class="form-control" ></textarea>
+										</div>
+										<div class="form--error--message--left" id="form--error--message--alamat"></div>
+									</div>
+								</div>
+
+								<div class="create__form__row">
+
+									<div class="new__form__field">
+										<label>Nomer Telpon</label>
+										<div class="field__icon">
+											<input v-model="models.no_telpon" name="no_telpon" type="number" id="no_telpon" class="form-control" placeholder="Enter here">
 										</div>
 										<div class="form--error--message--left" id="form--error--message--no_telpon"></div>
 									</div>
+								</div>
+
+								<div class="create__form__row">
 
 									<div class="new__form__field">
-										<label>Alamat Perusahaan</label>
+										<label>Contact Person</label>
 										<div class="field__icon">
-											<textarea v-model="models.alamat" name="alamat" id="alamat" class="form-control"></textarea>
+											<input v-model="models.contact_person" name="contact_person" type="text" id="contact_person" class="form-control" placeholder="Enter here">
 										</div>
-										<div class="form--error--message--left" id="form--error--message--alamat"></div>
+										<div class="form--error--message--left" id="form--error--message--contact_person"></div>
 									</div>
 								</div>
 							</div>

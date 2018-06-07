@@ -5419,10 +5419,10 @@ input, textarea, select {
     -moz-appearance: none;
     -ms-appearance: none;
 }
-[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+/*[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
     position: absolute;
     left: -9999px;
-}
+}*/
 
 .form--checkbox__wrapper .checkbox--label {
     font-size: 12px;
@@ -5753,4 +5753,27 @@ table.table__style tr th {
 }
 .dropdown__select__list .dropdown__content li .dropdown__content__link:hover {
     color: #bfb84d; 
+}
+.form--wizard--tab .wizard--tab--ul {
+    display: -ms-flexbox;
+    display: flex;
+    background-color: #fbfbfb;
+}
+.form--wizard--tab .wizard--tab--ul .wizard--tab--li {
+    width: 150px;
+    height: 40px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.form--wizard--tab .wizard--tab--ul .wizard--tab--li.active__tab a {
+    color: #4d9903;
+    transition: all .3s;
+}
+.form--wizard--tab .wizard--tab--ul .wizard--tab--li .wizard--tab--link {
+    font-size: 12px;
+    position: relative;
 }

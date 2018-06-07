@@ -18,12 +18,10 @@ function crud_target_pengujian() {
 
             models: {
                 id:'',
-                nama_target: '',
-                target_hph: '',
-                keterangan: '',
+                nama_target_pengujian: '',
             },
             data: {},
-            form_add_title: "List Target Pengujian",
+            form_add_title: "List Data Target Pengujian",
             edit: false,
         },
 
@@ -31,15 +29,12 @@ function crud_target_pengujian() {
 
             fetchData: function() {
                 var vm = this
-                var domain  = laroute.route('cms_target_pengujian_data', []);
+                var domain  = laroute.route('cms_master_target_pengujian_data', []);
                 
                 this.$http.get(domain).then(function (response) {
                     response = response.data
-                    if(response.status == true) {
-                        vm.data = response.data.list_data
-                    } else {
-                        pushNotif(response.status, response.message)
-                    }
+                    vm.data = response.data.list_data
+                    
                 })
             },
 
@@ -83,8 +78,8 @@ function crud_target_pengujian() {
 
                 };
 
-                $("#form__target_pengujian").ajaxForm(optForm);
-                $("#form__target_pengujian").submit();
+                $("#form__master_target_pengujian").ajaxForm(optForm);
+                $("#form__master_target_pengujian").submit();
             },
 
             editData: function(id) {
@@ -92,6 +87,8 @@ function crud_target_pengujian() {
                 this.edit = true
                 this.checkFunctions = []          
                 var payload = []
+                var vm = this
+
                 payload['id'] = id
                 payload['_token'] = token
 
@@ -101,12 +98,13 @@ function crud_target_pengujian() {
                     form.append(key, payload[key])
                 }
 
-                var domain  = laroute.route('cms_target_pengujian_edit', []);
+                var domain  = laroute.route('cms_master_target_pengujian_edit', []);
                 this.$http.post(domain, form).then(function(response) {
-
+                    
                     if (response.status) {
-                        this.models = response.data;
+                        vm.models = response.data
                         $('#toggle-form-content').slideDown('swing')
+                        
                     } else {
                         pushNotif(response.status,response.message)
                     }
@@ -116,11 +114,10 @@ function crud_target_pengujian() {
             resetForm: function() {
 
                 this.models.id = ''
-                this.models.nama_target = ''
-                this.models.target_hph = ''
-                this.models.keterangan = ''
-                this.form_add_title = "List Target Pengujian"
-                
+                this.models.nama_target_pengujian = ''
+                this.form_add_title = "List Data Target Pengujian"
+                //$('#nama_lab').val().trigger("chosen:updated")
+
                 this.clearErrorMessage()
                 this.edit = false
             },
@@ -129,9 +126,24 @@ function crud_target_pengujian() {
                 $(".form--error--message--left").text('')
             },
 
+            initChoosen: function() {
+
+                var vm = this
+                $("#nama_lab").chosen({    
+                    width: "100%",    
+                    disable_search: false,
+                    theme: "dark"
+                }).change(function() {
+                    vm.lab_selector = this.value
+
+                }).trigger("chosen:updated");
+            }
+
         },
         mounted: function () {
+
             this.fetchData();
+            //this.initChoosen();
         }
 
     });

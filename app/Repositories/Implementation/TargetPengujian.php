@@ -18,14 +18,14 @@ use Hash;
 class TargetPengujian extends BaseImplementation implements TargetPengujianInterface
 {
 
-    protected $targetPengujian;
-    protected $targetPengujianTransformation;
+    protected $daftarTargetPengujian;
+    protected $daftarTargetPengujianTransformation;
 
-    function __construct(TargetPengujianModel $targetPengujian, TargetPengujianTransformation $targetPengujianTransformation)
+    function __construct(TargetPengujianModel $daftarTargetPengujian, TargetPengujianTransformation $daftarTargetPengujianTransformation)
     {
 
-        $this->targetPengujian = $targetPengujian;
-        $this->targetPengujianTransformation = $targetPengujianTransformation;
+        $this->daftarTargetPengujian = $daftarTargetPengujian;
+        $this->daftarTargetPengujianTransformation = $daftarTargetPengujianTransformation;
     }
 
     /**
@@ -37,9 +37,7 @@ class TargetPengujian extends BaseImplementation implements TargetPengujianInter
 
     public function getData($params)
     {
-    	$targetPengujianData = $this->targetPengujian($params, 'asc', 'array', false);
-
-    	return $this->targetPengujianTransformation->getDataTransform($targetPengujianData);
+    	return $this->daftarTargetPengujianTransformation->getDataTransform($this->daftarTargetPengujian($params, 'desc', 'array', false));
     }
 
     /**
@@ -50,7 +48,7 @@ class TargetPengujian extends BaseImplementation implements TargetPengujianInter
      */
     public function edit($params)
     {
-        return $this->targetPengujianTransformation->getSingleDataTransform($this->targetPengujian($params, 'asc', 'array', true));
+        return $this->daftarTargetPengujianTransformation->getSingleDataTransform($this->daftarTargetPengujian($params, 'asc', 'array', true));
     }
 
     /**
@@ -62,7 +60,7 @@ class TargetPengujian extends BaseImplementation implements TargetPengujianInter
     public function store($params)
     {
         try {
-            
+
             DB::beginTransaction();
 
             if(!$this->storeData($params)) {
@@ -72,7 +70,7 @@ class TargetPengujian extends BaseImplementation implements TargetPengujianInter
 
             DB::commit();
             return $this->setResponse("Success save data", true);
-
+            
         } catch (Exception $e) {
             DB::rollBack();
             return $this->setResponse($e->getMessage(), false);
@@ -81,27 +79,28 @@ class TargetPengujian extends BaseImplementation implements TargetPengujianInter
 
     protected function storeData($params)
     {
-
         try {
             
-            $eloquent = $this->targetPengujian;
+            $eloquent = $this->daftarTargetPengujian;
 
             if(isset($params['id']) && !empty($params['id'])) 
             {
-                $eloquent                = $this->targetPengujian->find($params['id']);
-                $eloquent->updated_at    = Carbon::now();
+                $eloquent = $this->daftarTargetPengujian->find($params['id']);
+                $eloquent->updated_at  = Carbon::now();
 
+            } else {
+                
+                $eloquent->created_at   = Carbon::now();
             }
 
-            $eloquent->nama_target      = isset($params['nama_target']) ? $params['nama_target'] : '';
-            $eloquent->target_hph      = isset($params['target_hph']) ? $params['target_hph'] : '';
-            $eloquent->keterangan      = isset($params['keterangan']) ? $params['keterangan'] : '';
-            $eloquent->created_at       = Carbon::now();
+            $eloquent->nama_target_pengujian  = isset($params['nama_target_pengujian']) ? $params['nama_target_pengujian'] : '';
+            
 
             if($eloquent->save())
                 return true;
-            else
-                return false;
+
+            return false;
+
 
         } catch (Exception $e) {
             return false;
@@ -115,23 +114,23 @@ class TargetPengujian extends BaseImplementation implements TargetPengujianInter
      * @return array
      */
     
-    protected function targetPengujian($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
+    protected function daftarTargetPengujian($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
     {
-    	$targetPengujian = new TargetPengujianModel;
+    	$daftarTargetPengujian = TargetPengujianModel::orderBy('created_at', $orderType);
 
         if(isset($params['id'])) {
-            $targetPengujian = TargetPengujianModel::where('id', $params['id']);
+            $daftarTargetPengujian = TargetPengujianModel::where('id', $params['id']);
         }
 
-        if(!$targetPengujian->count())
+        if(!$daftarTargetPengujian->count())
             return array();
 
         switch ($returnType) {
             case 'array':
                 if(!$returnSingle) {
-                    return $targetPengujian->get()->toArray();
+                    return $daftarTargetPengujian->get()->toArray();
                 } else {
-                    return $targetPengujian->first()->toArray();
+                    return $daftarTargetPengujian->first()->toArray();
                 }
             break;
         }

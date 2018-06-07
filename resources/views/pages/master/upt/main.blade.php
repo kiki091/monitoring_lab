@@ -27,13 +27,8 @@
 			    			<th>#</th>
 			    			<th>Kode UPT</th>
 			    			<th>Nama UPT</th>
-			    			<th>Kelas UPT</th>
-			    			<th>Nama Lab</th>
-			    			<th>Jenis Pelabuhan</th>
 			    			<th>Daerah</th>
-			    			<th>No Tlp</th>
-			    			<th>No Fax</th>
-			    			<th>Email</th>
+			    			<th>Jenis Pelabuhan</th>
 			    			<th>Option</th>
 			    		</tr>
 		    		</thead>
@@ -43,13 +38,8 @@
 		    				<td>@{{ index+1 }}</td>
 		    				<td>@{{ obj.kode_upt }}</td>
 		    				<td>@{{ obj.nama_upt }}</td>
-		    				<td>@{{ obj.kelas_upt }}</td>
-		    				<td>@{{ obj.nama_lab }}</td>
-		    				<td>@{{ obj.jns_pelabuhan }}</td>
 		    				<td>@{{ obj.daerah }}</td>
-		    				<td>@{{ obj.no_tlp }}</td>
-		    				<td>@{{ obj.no_fax }}</td>
-		    				<td>@{{ obj.email }}</td>
+		    				<td>@{{ obj.jenis_pelabuhan }}</td>
 		    				<td>
 		    					<a href="#" @click="editData(obj.id)">Edit</a>
 		    				</td>

@@ -2,7 +2,7 @@
 	<div class="bg__gray">
 		<div class="page-title">
 			<div class="title_left">
-		        <h3>USER ACCOUNT </h3>
+		        <h3>ADMINISTRATOR </h3>
 		        <p>ACCOUNT MANAGEMENT SYSTEM</p>
 		    </div>
 		</div>

@@ -18,14 +18,14 @@ use Hash;
 class MetodePengujian extends BaseImplementation implements MetodePengujianInterface
 {
 
-    protected $metodePengujian;
-    protected $metodePengujianTransformation;
+    protected $daftarMetodePengujian;
+    protected $daftarMetodePengujianTransformation;
 
-    function __construct(MetodePengujianModel $metodePengujian, MetodePengujianTransformation $metodePengujianTransformation)
+    function __construct(MetodePengujianModel $daftarMetodePengujian, MetodePengujianTransformation $daftarMetodePengujianTransformation)
     {
 
-        $this->metodePengujian = $metodePengujian;
-        $this->metodePengujianTransformation = $metodePengujianTransformation;
+        $this->daftarMetodePengujian = $daftarMetodePengujian;
+        $this->daftarMetodePengujianTransformation = $daftarMetodePengujianTransformation;
     }
 
     /**
@@ -37,9 +37,7 @@ class MetodePengujian extends BaseImplementation implements MetodePengujianInter
 
     public function getData($params)
     {
-    	$metodePengujianData = $this->metodePengujian($params, 'asc', 'array', false);
-
-    	return $this->metodePengujianTransformation->getDataTransform($metodePengujianData);
+    	return $this->daftarMetodePengujianTransformation->getDataTransform($this->daftarMetodePengujian($params, 'desc', 'array', false));
     }
 
     /**
@@ -50,7 +48,7 @@ class MetodePengujian extends BaseImplementation implements MetodePengujianInter
      */
     public function edit($params)
     {
-        return $this->metodePengujianTransformation->getSingleDataTransform($this->metodePengujian($params, 'asc', 'array', true));
+        return $this->daftarMetodePengujianTransformation->getSingleDataTransform($this->daftarMetodePengujian($params, 'asc', 'array', true));
     }
 
     /**
@@ -62,7 +60,7 @@ class MetodePengujian extends BaseImplementation implements MetodePengujianInter
     public function store($params)
     {
         try {
-            
+
             DB::beginTransaction();
 
             if(!$this->storeData($params)) {
@@ -72,7 +70,7 @@ class MetodePengujian extends BaseImplementation implements MetodePengujianInter
 
             DB::commit();
             return $this->setResponse("Success save data", true);
-
+            
         } catch (Exception $e) {
             DB::rollBack();
             return $this->setResponse($e->getMessage(), false);
@@ -81,28 +79,31 @@ class MetodePengujian extends BaseImplementation implements MetodePengujianInter
 
     protected function storeData($params)
     {
-
         try {
             
-            $eloquent = $this->metodePengujian;
+            $eloquent = $this->daftarMetodePengujian;
 
             if(isset($params['id']) && !empty($params['id'])) 
             {
-                $eloquent                = $this->metodePengujian->find($params['id']);
-                $eloquent->updated_at    = Carbon::now();
+                $eloquent = $this->daftarMetodePengujian->find($params['id']);
+                $eloquent->updated_at  = Carbon::now();
 
+            } else {
+                
+                $eloquent->created_at   = Carbon::now();
             }
 
-            $eloquent->nama_kelompok     = isset($params['nama_kelompok']) ? $params['nama_kelompok'] : '';
-            $eloquent->target_pengujian_id     = isset($params['target_pengujian_id']) ? $params['target_pengujian_id'] : '';
-            $eloquent->laboratorium_id     = isset($params['laboratorium_id']) ? $params['laboratorium_id'] : '';
-            $eloquent->kelompok_uji_id     = isset($params['kelompok_uji_id']) ? $params['kelompok_uji_id'] : '1';
-            $eloquent->created_at        = Carbon::now();
+            $eloquent->nama_metode_pengujian            = isset($params['nama_metode_pengujian']) ? $params['nama_metode_pengujian'] : '';
+            $eloquent->target_pengujian_id              = isset($params['target_pengujian_id']) ? $params['target_pengujian_id'] : '';
+            $eloquent->laboratorium_id                  = isset($params['laboratorium_id']) ? $params['laboratorium_id'] : '';
+            $eloquent->kelompok_metode_pengujian_id     = isset($params['kelompok_metode_pengujian_id']) ? $params['kelompok_metode_pengujian_id'] : '';
+            
 
             if($eloquent->save())
                 return true;
-            else
-                return false;
+
+            return false;
+
 
         } catch (Exception $e) {
             return false;
@@ -116,23 +117,23 @@ class MetodePengujian extends BaseImplementation implements MetodePengujianInter
      * @return array
      */
     
-    protected function metodePengujian($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
+    protected function daftarMetodePengujian($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
     {
-    	$metodePengujian = MetodePengujianModel::with(['target_pengujian', 'lab', 'kelompok_pengujian']);
+    	$daftarMetodePengujian = $this->daftarMetodePengujian->with(['target_pengujian','laboratorium','kelompok_metode_pengujian'])->orderBy('created_at', $orderType);
 
-        if(isset($params['id'])) {
-            $metodePengujian = MetodePengujianModel::where('id', $params['id']);
+        if(!empty($params['id'])) {
+            $daftarMetodePengujian->where('id', $params['id']);
         }
 
-        if(!$metodePengujian->count())
+        if(!$daftarMetodePengujian->count())
             return array();
 
         switch ($returnType) {
             case 'array':
                 if(!$returnSingle) {
-                    return $metodePengujian->get()->toArray();
+                    return $daftarMetodePengujian->get()->toArray();
                 } else {
-                    return $metodePengujian->first()->toArray();
+                    return $daftarMetodePengujian->first()->toArray();
                 }
             break;
         }
