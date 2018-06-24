@@ -267,14 +267,14 @@ function crud_permohonan() {
                 this.sample.alamat[index] = ''
             },
 
-            sample_choices: function(idx, val) {
+            // sample_choices: function(idx, val) {
 
-                var vm = this
-                if(vm.sample_selected[0] == true)
-                    vm.sample_selected.push({idx,val})
-                else
-                    vm.sample_selected.splice(this.sample_selected.length + 1, 0, {idx,val})
-            },
+            //     var vm = this
+            //     if(vm.sample_selected[0] == true)
+            //         vm.sample_selected.push({idx,val})
+            //     else
+            //         vm.sample_selected.splice(this.sample_selected.length + 1, 0, {idx,val})
+            // },
 
             fetchData: function() {
                 var vm = this
@@ -364,6 +364,31 @@ function crud_permohonan() {
                     
                     if (response.status) {
                         vm.models = response.data
+                        vm.pengujian.lama_uji = response.data.lama_uji
+                        vm.kategori_selector = response.data.kategori_uji_id
+                        vm.dokter_selector = response.data.dokter_hewan_id
+                        vm.daerah_selector = response.data.daerah_id
+                        vm.kegiatan_selector = response.data.kegiatan_id
+                        vm.upt_selector = response.data.upt_id
+                        vm.perusahaan_selector = response.data.perusahaan_id
+                        vm.negara_selector = response.data.negara_id
+                        vm.type_permohonan_selector = response.data.type_permohonan
+                        vm.target_uji_golongan_selector = response.data.target_uji_golongan_id
+                        vm.target_pest_selector = response.data.target_pest_id
+                        vm.sample_selected = response.data.sample_permohonan
+                        vm.dokument_pendukung = response.data.dokument_pendukung
+
+                        $('#daerah_id').val(response.data.daerah_id).trigger("chosen:updated")
+                        $('#kategori_uji_id').val(response.data.kategori_uji_id).trigger("chosen:updated")
+                        $('#dokter_hewan_id').val(response.data.dokter_hewan_id).trigger("chosen:updated")
+                        $('#kegiatan_id').val(response.data.kegiatan_id).trigger("chosen:updated")
+                        $('#upt_id').val(response.data.upt_id).trigger("chosen:updated")
+                        $('#perusahaan_id').val(response.data.perusahaan_id).trigger("chosen:updated")
+                        $('#negara_id').val(response.data.negara_id).trigger("chosen:updated")
+                        $('#type_permohonan').val(response.data.type_permohonan).trigger("chosen:updated")
+
+                        $('#target_uji_golongan_id').val(response.data.target_uji_golongan_id).trigger("chosen:updated")
+                        $('#target_pest_id').val(response.data.target_pest_id).trigger("chosen:updated")
                         $('#toggle-form-content').slideDown('swing')
                         
                     } else {
@@ -380,7 +405,7 @@ function crud_permohonan() {
                 this.kegiatan_selector = ''
                 this.negara_selector = ''
                 this.perusahaan_selector = ''
-                this.sample_selected = ''
+                this.sample_selected = []
                 this.satuan_selector = ''
                 this.search_by_kode_sample = ''
                 this.target_pest_selector = ''
@@ -427,7 +452,6 @@ function crud_permohonan() {
                 $('#kegiatan_id').val('').trigger("chosen:updated")
                 $('#negara_id').val('').trigger("chosen:updated")
                 $('#perusahaan_id').val('').trigger("chosen:updated")
-                $('#satuan_id').val('').trigger("chosen:updated")
                 $('#target_pest_id').val('').trigger("chosen:updated")
                 $('#target_uji_golongan_id').val('').trigger("chosen:updated")
                 $('#type_permohonan').val('').trigger("chosen:updated")

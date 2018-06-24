@@ -78,7 +78,7 @@ function masonryAdminNavigation(delays){
 /* ================================== END =====================================*/
 function selectorDropdownHeader(){
   $('#selector-dropdown').on('click', function(){
-    console.log("masuk")
+    
     $(this).toggleClass('open');
   });
 
@@ -526,7 +526,7 @@ function notify(){
     });
 
     $('.notifyjs-wrapper').on('load', '.notif__content__ul', function(){
-    console.log('aefaa');
+    
     $(this).mCustomScrollbar({
       theme:"dark-thin",
       axis:"y"
@@ -593,7 +593,7 @@ function wizardSlide(){
   $('.wizard--tab ul').append('<li class="slide-line"></li>');
 
   $(document).on('click', '.wizard--tab li a', function () {
-    console.log("xccc")
+
     /* slide tab wizard */
     var $this = $(this).parent('li'),
     offset = $this.offset(),
@@ -842,11 +842,11 @@ function moveCheckDisableCondition(){
 
   setTimeout(function(){
     if($('#ul-checked').find('li').length<3){
-      console.log('1-3');
+      
       $('.moving--check--checkbox').find('ul').removeClass('disabled');
     }
     else{
-      console.log('lebih dr sm dg 3');
+     
       $('.moving--check--checkbox').find('ul').addClass('disabled');
     }
   }, 1000);

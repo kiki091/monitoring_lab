@@ -39,9 +39,40 @@ class Permohonan extends BaseModel
         return $this->belongsTo('App\Models\Kegiatan', 'kegiatan_id', 'id');
     }
     
+    public function kategori()
+    {
+        return $this->belongsTo('App\Models\Kategori', 'kategori_uji_id', 'id');
+    }
+    
     public function sample_permohonan()
     {
-        return $this->hasMany('App\Models\SamplePermohonan', 'id', 'permohonan_id')->with('sample');
+        return $this->hasMany('App\Models\SamplePermohonan', 'permohonan_id', 'id')->with('sample');
+    }
+    
+    public function permohonan_pengujian()
+    {
+        return $this->belongsTo('App\Models\PermohonanPengujian', 'id', 'permohonan_id')->with(['target_uji_golongan', 'target_pest']);
+    }
+    
+    public function upt()
+    {
+        return $this->belongsTo('App\Models\Upt', 'upt_id', 'id');
+    }
+    
+    public function daerah()
+    {
+        return $this->belongsTo('App\Models\Daerah', 'daerah_id', 'id');
+    }
+    
+    public function negara()
+    {
+        return $this->belongsTo('App\Models\Negara', 'negara_id', 'id');
+    }
+
+    
+    public function perusahaan()
+    {
+        return $this->belongsTo('App\Models\Perusahaan', 'perusahaan_id', 'id');
     }
 
     /***************** Scope *****************/

@@ -4,11 +4,11 @@ namespace App\Repositories\Implementation;
 
 use App\Repositories\Implementation\BaseImplementation;
 use App\Repositories\Contracts\Permohonan as PermohonanInterface;
-use App\Models\Sample as SampleModel;
+use App\Models\PermohonanPengujian as PermohonanPengujianModel;
 use App\Models\Permohonan as PermohonanModel;
 use App\Models\SamplePermohonan as SamplePermohonanModel;
 use App\Services\Transformation\Permohonan as PermohonanTransformation;
-use App\Custom\Facades\DataHelper;
+use App\Custom\Auth\DataHelper;
 
 use Carbon\Carbon;
 use Cache;
@@ -22,17 +22,17 @@ class Permohonan extends BaseImplementation implements PermohonanInterface
 
     protected $permohonanId;
     protected $sampleId;
-    protected $daftarSample;
     protected $daftarPermohonan;
     protected $daftarSamplePermohonan;
+    protected $daftarPermohonanPengujian;
     protected $daftarPermohonanTransformation;
 
-    function __construct(SampleModel $daftarSample, SamplePermohonanModel $daftarSamplePermohonan, PermohonanModel $daftarPermohonan, PermohonanTransformation $daftarPermohonanTransformation)
+    function __construct(PermohonanPengujianModel $daftarPermohonanPengujian, SamplePermohonanModel $daftarSamplePermohonan, PermohonanModel $daftarPermohonan, PermohonanTransformation $daftarPermohonanTransformation)
     {
 
-        $this->daftarSample = $daftarSample;
         $this->daftarPermohonan = $daftarPermohonan;
         $this->daftarSamplePermohonan = $daftarSamplePermohonan;
+        $this->daftarPermohonanPengujian = $daftarPermohonanPengujian;
         $this->daftarPermohonanTransformation = $daftarPermohonanTransformation;
     }
 
@@ -79,12 +79,12 @@ class Permohonan extends BaseImplementation implements PermohonanInterface
                 return $this->setResponse("Failed save data", false);
             }
 
-            if(!$this->storeDataSample($params)) {
+            if(!$this->storeDataSamplePermohonan($params)) {
                 DB::rollBack();
                 return $this->setResponse("Failed save data", false);
             }
 
-            if(!$this->storeDataSamplePermohonan($params)) {
+            if(!$this->storeDataPermohonanPengujian($params)) {
                 DB::rollBack();
                 return $this->setResponse("Failed save data", false);
             }
@@ -120,13 +120,16 @@ class Permohonan extends BaseImplementation implements PermohonanInterface
                 $eloquentPermohonan->no_permohonan    = rand(10000, 100000).'.'.rand(10000, 100000).'.'.rand(10000, 100000);
                 $eloquentPermohonan->tgl_permohonan   = Carbon::now()->format('Y-m-d');
                 $eloquentPermohonan->created_at       = Carbon::now();
+                $eloquentPermohonan->user_id          = DataHelper::userId();
             }
 
             $eloquentPermohonan->dokter_hewan_id      = isset($params['dokter_hewan_id']) ? $params['dokter_hewan_id'] : '';
+            $eloquentPermohonan->kategori_uji_id      = isset($params['kategori_uji_id']) ? $params['kategori_uji_id'] : '';
             $eloquentPermohonan->kegiatan_id          = isset($params['kegiatan_id']) ? $params['kegiatan_id'] : '';
-            $eloquentPermohonan->upt_id               = isset($params['upt_id']) ? $params['upt_id'] : '';
-            $eloquentPermohonan->daerah_id            = isset($params['daerah_id']) ? $params['daerah_id'] : '';
-            $eloquentPermohonan->negara_id            = isset($params['negara_id']) ? $params['negara_id'] : '';
+            $eloquentPermohonan->upt_id               = isset($params['upt_id']) ? $params['upt_id'] : '0';
+            $eloquentPermohonan->daerah_id            = isset($params['daerah_id']) ? $params['daerah_id'] : '0';
+            $eloquentPermohonan->negara_id            = isset($params['negara_id']) ? $params['negara_id'] : '0';
+            $eloquentPermohonan->perusahaan_id        = isset($params['perusahaan_id']) ? $params['perusahaan_id'] : '0';
             $eloquentPermohonan->type_permohonan      = isset($params['type_permohonan']) ? $params['type_permohonan'] : '';
             $eloquentPermohonan->nama_pemilik         = isset($params['nama_pemilik']) ? $params['nama_pemilik'] : '';
             $eloquentPermohonan->alamat_pemilik       = isset($params['alamat_pemilik']) ? $params['alamat_pemilik'] : '';
@@ -138,11 +141,11 @@ class Permohonan extends BaseImplementation implements PermohonanInterface
 
             if(isset($params['dokument_pendukung']) && !empty($params['dokument_pendukung'])) {
 
-                $eloquentPermohonan->dokument_pendukung   = strtolower(str_slug($params['dokument_pendukung']->getClientOriginalName()));
+                $eloquentPermohonan->dokument_pendukung   = $params['dokument_pendukung']->getClientOriginalName();
             }
 
             if($eloquentPermohonan->save()) {
-                $eloquentPermohonan->id = $this->permohonanId;
+                $this->permohonanId = $eloquentPermohonan->id;
                 return true;
             }
 
@@ -154,28 +157,74 @@ class Permohonan extends BaseImplementation implements PermohonanInterface
         }
     }
 
-    protected function storeDataSample($params)
+    protected function storeDataSamplePermohonan($params)
     {
 
         try {
-            
-            
+
+            if(!empty($params['id']))
+                $this->removeDataSamplePermohonan($params['id']);
+
+            foreach ($params['sample_id'] as $key => $value) {
+                $objData[] = [
+                    'sample_id'     => $value,
+                    'permohonan_id' => $this->permohonanId,
+                    'created_at'    => Carbon::now(),
+                    'updated_at'    => Carbon::now(),
+                ];
+            }
+
+            if($saved = $this->daftarSamplePermohonan->insert($objData))
+                return true;
+
+            return false;
 
         } catch (Exception $e) {
             return false;
         }
     }
 
-    protected function storeDataSamplePermohonan($params)
+    protected function storeDataPermohonanPengujian($params)
     {
 
         try {
 
-            
+            if(!empty($params['id']))
+                $this->removeDataPermohonanPengujian($params['id']);
+
+            $store = $this->daftarPermohonanPengujian;
+
+            $store->permohonan_id               = $this->permohonanId;
+            $store->target_uji_golongan_id      = isset($params['target_uji_golongan_id']) ? $params['target_uji_golongan_id'] : '';
+            $store->target_pest_id              = isset($params['target_pest_id']) ? $params['target_pest_id'] : '';
+            $store->lama_uji                    = isset($params['lama_uji']) ? $params['lama_uji'] : '';
+            $store->created_at                  = Carbon::now();
+            $store->updated_at                  = Carbon::now();
+
+            if($store->save())
+                return true;
+
+            return false;
 
         } catch (Exception $e) {
-            
+            return false;
         }
+    }
+
+    protected function removeDataSamplePermohonan($permohonan_id)
+    {
+        if(empty($permohonan_id))
+            return false;
+
+        $this->daftarSamplePermohonan->where('permohonan_id', $permohonan_id)->delete();
+    }
+
+    protected function removeDataPermohonanPengujian($permohonan_id)
+    {
+        if(empty($permohonan_id))
+            return false;
+
+        $this->daftarPermohonanPengujian->where('permohonan_id', $permohonan_id)->delete();
     }
 
     /**
@@ -224,15 +273,15 @@ class Permohonan extends BaseImplementation implements PermohonanInterface
     
     protected function daftarPermohonan($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
     {
-    	$daftarPermohonan = new PermohonanModel;
+    	$daftarPermohonan = $this->daftarPermohonan->with(['dokter_hewan', 'kegiatan', 'sample_permohonan', 'sample_permohonan.sample', 'kategori', 'permohonan_pengujian', 'upt', 'daerah', 'negara', 'perusahaan'])->orderBy('tgl_permohonan', 'desc');
 
         if(isset($params['id'])) {
-            $daftarPermohonan = PermohonanModel::where('id', $params['id']);
+            $daftarPermohonan->where('id', $params['id']);
+            //dd($daftarPermohonan->where('id', $params['id'])->first()->toArray());
         }
 
-        if(isset($params['order'])) {
-            $daftarPermohonan->orderBy($params['order'], $orderType);
-        }
+        if(DataHelper::userLevel() == 'admin')
+            $daftarPermohonan->where('user_id', DataHelper::userId());
 
         if(!$daftarPermohonan->count())
             return array();

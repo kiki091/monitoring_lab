@@ -646,4 +646,5 @@ function init_master_permohonan()
     replaceToCkEditor();
     initChoosen();
     moveCheck();
+    uploadFile();
 }

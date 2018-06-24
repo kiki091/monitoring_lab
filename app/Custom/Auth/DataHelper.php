@@ -60,6 +60,21 @@ class DataHelper {
     }
 
     /**
+     * Get User Level
+     */
+
+    public static function userLevel()
+    {
+        $userInfo = Session::get('user_info');
+
+        if (isset($userInfo['level'])) {
+            return $userInfo['level'];
+        }
+
+        return false;
+    }
+
+    /**
      * Get User Role
      */
     public static function userRole()

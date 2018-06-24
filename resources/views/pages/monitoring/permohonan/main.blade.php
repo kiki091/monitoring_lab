@@ -77,7 +77,7 @@
 												<div class="form--error--message--left" id="form--error--message--kegiatan_id"></div>
 											</div>
 										</div>
-										<div class="create__form__row" v-if="show_negara == true">
+										<div class="create__form__row" v-bind:class="{'hide__element': !show_negara }">
 											<div class="new__form__field">
 												<label>Asal Negara</label>
 												<div class="field__icon">
@@ -88,7 +88,7 @@
 												<div class="form--error--message--left" id="form--error--message--negara_id"></div>
 											</div>
 										</div>
-										<div class="create__form__row" v-if="show_upt == true">
+										<div class="create__form__row" v-bind:class="{'hide__element': !show_upt }">
 											<div class="new__form__field">
 												<label>Asal UPT / Wilker</label>
 												<div class="field__icon">
@@ -99,7 +99,7 @@
 												<div class="form--error--message--left" id="form--error--message--upt_id"></div>
 											</div>
 										</div>
-										<div class="create__form__row" v-if="show_daerah == true">
+										<div class="create__form__row" v-bind:class="{'hide__element': !show_daerah }">
 											<div class="new__form__field">
 												<label>Asal Daerah</label>
 												<div class="field__icon">
@@ -134,7 +134,7 @@
 
 									<div id="form-accordion-2" style="display: block;">
 
-										<div class="create__form__row" v-if="show_perusahaan == true">
+										<div class="create__form__row" v-bind:class="{'hide__element': !show_perusahaan }">
 											<div class="new__form__field">
 												<label>Nama Perusahaan / Pemilik / Penuh / Kuasa</label>
 												<div class="field__icon">
@@ -145,7 +145,7 @@
 												<div class="form--error--message--left" id="form--error--message--perusahaan_id"></div>
 											</div>
 										</div>
-										<div class="create__form__row" v-if="show_nama_pemilik == true">
+										<div class="create__form__row" v-bind:class="{'hide__element': !show_nama_pemilik }">
 											<div class="new__form__field">
 												<label>Nama Pemilik / Penuh / Kuasa</label>
 												<div class="field__icon">
@@ -155,7 +155,7 @@
 											</div>
 										</div>
 
-										<div class="create__form__row"  v-if="show_alamat_pemilik == true">
+										<div class="create__form__row" v-bind:class="{'hide__element': !show_alamat_pemilik }">
 											<div class="new__form__field">
 												<label>Alamat Pemilik / Penuh / Kuasa</label>
 												<div class="field__icon">
@@ -201,9 +201,12 @@
 										<div class="create__form__row" v-if="models.lampiran_hasil_uji == 1">
 											<div class="new__form__field">
 												<label>Upload Dokumen</label>
-												<div class="field__icon">
-													<input v-model="dokument_pendukung" name="dokument_pendukung" type="file" id="dokument_pendukung" class="new__form__input__field">
-												</div>
+												<div class="custom__file__upload">
+                                                    <input type="file" class="upload__file__input" id="dokument_pendukung" name="dokument_pendukung" />
+                                                    <input type="text" id="upload-file-placeholder" class="upload__file__placeholder" placeholder="No file selected" readonly="readonly" v-if="edit == false">
+                                                    <input type="text" id="upload-file-placeholder-old" v-model="dokument_pendukung" class="upload__file__placeholder" placeholder="" readonly="readonly" v-if="edit == true">
+                                                    <label for="dokument_pendukung" class="upload__file__button">CHOOSE FILE</label>
+                                                </div>
 												<div class="form--error--message--left" id="form--error--message--dokument_pendukung"></div>
 											</div>
 										</div>
@@ -305,7 +308,21 @@
 													<p>Pilih beberapa sample yang ada di daftar</p>
 												</div>
 												
-												<ul id="ul-checked">
+												<ul id="ul-checked" v-if="edit == true">
+													<li v-for="(sample_selected, idx) in sample_selected" v-if="edit == true">
+														<div class="form--checkbox__wrapper hidden-in-checkbox-test">
+															<span class="priority"></span>
+															<input type="checkbox" :id="'checkbox-'+idx" class="checkbox--input" name="sample_id[]" :value="sample_selected.sample_id" v-bind:checked="sample_selected.is_checked == true">
+															<label :for="'checkbox-'+idx" class="checkbox--label">@{{ sample_selected.nama_sample }}</label>
+															<div class="handle">
+																<span class="handle-bar1"></span>
+																<span class="handle-bar2"></span>
+																<span class="handle-bar3"></span>
+															</div>
+														</div>
+													</li>
+												</ul>
+												<ul id="ul-checked" v-else>
 												</ul>
 											</div>
 										</div>
@@ -423,19 +440,40 @@
 			    			<th>Tgl Terima Sample</th>
 			    			<th>Nama Pengirim</th>
 			    			<th>Status</th>
+			    			<th>Option</th>
 			    		</tr>
 		    		</thead>
 		    		<tbody>
-		    			<tr>
-		    				<td></td>
-		    				<td></td>
-		    				<td></td>
-		    				<td></td>
-		    				<td></td>
-		    				<td></td>
-		    				<td></td>
-		    				<td></td>
-		    				<td></td>
+		    			<tr v-for="(obj, index) in data">
+		    				<td>@{{ index+1 }}</td>
+		    				<td>@{{ obj.tgl_permohonan }}</td>
+		    				<td>@{{ obj.no_agenda }}</td>
+		    				<td>@{{ obj.no_permohonan }}</td>
+		    				<td>
+		    					<template v-if="obj.type_permohonan == 1">
+		    						Hewan
+		    					</template>
+		    					<template v-else>
+		    						Tumbuhan
+		    					</template>
+		    				</td>
+		    				<td>@{{ obj.kategori }}</td>
+		    				<td>@{{ obj.tgl_terima_sample }}</td>
+		    				<td>@{{ obj.nama_pengirim }}</td>
+		    				<td>
+		    					<template v-if="obj.status == 0">
+		    						Ditolak
+		    					</template>
+		    					<template v-else-if="obj.status == 1">
+		    						Waiting
+		    					</template>
+		    					<template v-else>
+		    						Disetujui
+		    					</template>
+		    				</td>
+		    				<td>
+		    					<a href="javascript::void()" @click="editData(obj.id)">Edit Data <i class="fa fa-pencil"></i></a>
+		    				</td>
 		    			</tr>
 		    		</tbody>
 		    </div>

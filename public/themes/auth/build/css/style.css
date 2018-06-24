@@ -16756,8 +16756,8 @@ ul.verticle_bars li {
 }
 .alert-info {
     color: #E9EDEF;
-    background-color: rgba(52, 152, 219, 0.88);
-    border-color: rgba(52, 152, 219, 0.88)
+    background-color: rgb(77, 153, 2);
+    border-color: rgb(77, 153, 2);
 }
 .alert-warning {
     color: #E9EDEF;
@@ -18161,7 +18161,7 @@ input, textarea, select {
     display: flex;
     -ms-flex-align: center;
     align-items: center;
-    background-color: #5a738e;
+    background-color: #4d9902;
     color: #ffffff;
     font-family: "brandon_bold";
     font-size: 11px;

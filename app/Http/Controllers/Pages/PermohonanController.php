@@ -109,7 +109,7 @@ class PermohonanController extends BaseController
      */
 
     public function store(Request $request)
-    {dd($request->all());
+    {
         $validator = Validator::make($request->all(), $this->validation($request));
 
         if ($validator->fails()) {
@@ -138,18 +138,52 @@ class PermohonanController extends BaseController
      */
     protected function validation($request = array())
     {
-        $rules = [
-            'dokter_hewan_id'       => 'required',
-            'kegiatan_id'           => 'required',
-            'type_permohonan'       => 'required',
-            'nama_pemilik'          => 'required',
-            'lampiran_hasil_uji'    => 'required',
-            'dokument_pendukung'    => 'required',
-            'pengiriman_sample'     => 'required',
-            'nama_pengirim'         => 'required',
-            'tgl_terima_sample'     => 'required',
-            'nip_petugas_penerima'  => 'required',
-        ];
+        if($request['kegiatan_id'] == '3')
+        {
+            $rules = [
+                'type_permohonan'           => 'required',
+                'kategori_uji_id'           => 'required',
+                'kegiatan_id'               => 'required',
+                'negara_id'                 => 'required',
+                'dokter_hewan_id'           => 'required',
+                'nama_pemilik'              => 'required',
+                'alamat_pemilik'            => 'required',
+                'pengiriman_sample'         => 'required',
+                'nama_pengirim'             => 'required',
+                'tgl_terima_sample'         => 'required',
+                'nip_petugas_penerima'      => 'required',
+                'sample_id'                 => 'required',
+                'target_uji_golongan_id'    => 'required',
+                'target_pest_id'            => 'required',
+                'lama_uji'                  => 'required|numeric',
+            ];
+
+        } else {
+            $rules = [
+                'type_permohonan'           => 'required',
+                'kategori_uji_id'           => 'required',
+                'kegiatan_id'               => 'required',
+                'upt_id'                    => 'required',
+                'daerah_id'                 => 'required',
+                'dokter_hewan_id'           => 'required',
+                'perusahaan_id'             => 'required',
+                'pengiriman_sample'         => 'required',
+                'nama_pengirim'             => 'required',
+                'tgl_terima_sample'         => 'required',
+                'nip_petugas_penerima'      => 'required',
+                'sample_id'                 => 'required',
+                'target_uji_golongan_id'    => 'required',
+                'target_pest_id'            => 'required',
+                'lama_uji'                  => 'required|numeric',
+            ];
+        }
+        
+        if(!empty($request['dokument_pendukung']))
+            $rules['dokument_pendukung'] = 'required|max:1200|mimes:pdf,doc,docx,xlsx';
+
+        if(! is_null($request->input('id')))
+            if (is_null($request->file('dokument_pendukung')))
+                unset($rules['dokument_pendukung']);
 
         return $rules;
     }

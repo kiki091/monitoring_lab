@@ -4,16 +4,18 @@ namespace App\Models;
 
 use App\Models\BaseModel;
 
-class SamplePermohonan extends BaseModel
+class PermohonanPengujian extends BaseModel
 {
-    protected $table = 'tbl_sample_permohonan';
+    protected $table = 'tbl_permohonan_pengujian';
 
     public $timestamps = true;
 
     protected $fillable = [
         'id',
         'permohonan_id',
-        'sample_id',
+        'target_uji_golongan_id',
+        'target_pest_id',
+        'lama_uji',
     ];
 
     /**
@@ -27,14 +29,19 @@ class SamplePermohonan extends BaseModel
 
     protected $guarded = [];
     
-    public function sample()
-    {
-        return $this->belongsTo('App\Models\Sample', 'sample_id', 'id');
-    }
-    
     public function permohonan()
     {
         return $this->belongsTo('App\Models\Permohonan', 'permohonan_id', 'id');
+    }
+    
+    public function target_uji_golongan()
+    {
+        return $this->belongsTo('App\Models\TargetUjiGolongan', 'target_uji_golongan_id', 'id');
+    }
+    
+    public function target_pest()
+    {
+        return $this->belongsTo('App\Models\TargetPest', 'target_pest_id', 'id');
     }
 
 
