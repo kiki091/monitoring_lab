@@ -275,10 +275,33 @@ class Permohonan extends BaseImplementation implements PermohonanInterface
     {
     	$daftarPermohonan = $this->daftarPermohonan->with(['dokter_hewan', 'kegiatan', 'sample_permohonan', 'sample_permohonan.sample', 'kategori', 'permohonan_pengujian', 'upt', 'daerah', 'negara', 'perusahaan'])->orderBy('tgl_permohonan', 'desc');
 
-        if(isset($params['id'])) {
+        if(isset($params['status'])) 
+            $daftarPermohonan->where('status', $params['status']);
+
+        if(isset($params['type_permohonan'])) 
+            $daftarPermohonan->where('type_permohonan', $params['type_permohonan']);
+        
+        if(isset($params['upt_id'])) 
+            $daftarPermohonan->where('upt_id', $params['upt_id']);
+        
+        if(isset($params['negara_id'])) 
+            $daftarPermohonan->where('negara_id', $params['negara_id']);
+        
+        if(isset($params['perusahaan_id'])) 
+            $daftarPermohonan->where('perusahaan_id', $params['perusahaan_id']);
+        
+        if(isset($params['daerah_id'])) 
+            $daftarPermohonan->where('daerah_id', $params['daerah_id']);
+        
+        if(isset($params['tgl_permohonan'])) 
+            $daftarPermohonan->where('tgl_permohonan', $params['tgl_permohonan']);
+        
+        if(isset($params['no_permohonan'])) 
+            $daftarPermohonan->where('no_permohonan', 'like', '%'.$params['no_permohonan'].'%');
+
+        if(isset($params['id'])) 
             $daftarPermohonan->where('id', $params['id']);
-            //dd($daftarPermohonan->where('id', $params['id'])->first()->toArray());
-        }
+        
 
         if(DataHelper::userLevel() == 'admin')
             $daftarPermohonan->where('user_id', DataHelper::userId());

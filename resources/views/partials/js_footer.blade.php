@@ -57,3 +57,4 @@
 <script src="{{ asset('themes/pages/sample.js') }}"></script>
 <script src="{{ asset('themes/pages/kategori.js') }}"></script>
 <script src="{{ asset('themes/pages/permohonan.js') }}"></script>
+<script src="{{ asset('themes/pages/verifikasi.js') }}"></script>

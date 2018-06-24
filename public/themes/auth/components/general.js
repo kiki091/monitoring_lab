@@ -648,3 +648,11 @@ function init_master_permohonan()
     moveCheck();
     uploadFile();
 }
+
+function init_varifikasi_permohonan()
+{
+    mainGeneral();
+    crud_verifikasi();
+    buttonClickOpen();
+    buttonClickClose();
+}

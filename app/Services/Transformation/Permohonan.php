@@ -51,6 +51,12 @@ class Permohonan
                 'tgl_terima_sample'     => isset($data['tgl_terima_sample']) ? $data['tgl_terima_sample'] : '',
                 'nama_pengirim'         => isset($data['nama_pengirim']) ? $data['nama_pengirim'] : '',
                 'status'                => isset($data['status']) ? $data['status'] : '',
+                'nip_petugas_penerima'  => isset($data['nip_petugas_penerima']) ? $data['nip_petugas_penerima'] : '',
+                'nama_kegiatan'         => isset($data['kegiatan']) ? $data['kegiatan']['nama_kegiatan'] : '',
+                'nama_upt'              => isset($data['upt']) ? $data['upt']['nama_upt'] : '',
+                'nama_daerah'           => isset($data['daerah']) ? $data['daerah']['nama_daerah'] : '',
+                'nama_perusahaan'       => isset($data['perusahaan']) ? $data['perusahaan']['nama_perusahaan'] : '',
+                'nama_negara'           => isset($data['negara']) ? $data['negara']['nama_negara'] : '',
                 
             ];
 

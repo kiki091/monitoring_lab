@@ -235,3 +235,12 @@ function menu_master_permohonan()
         init_master_permohonan()
     });
 }
+// JAVASCRIPT 
+
+function menu_varifikasi_permohonan()
+{
+    $('.right_col').load(laroute.route('cms_varifikasi_index', []), function()
+    {
+        init_varifikasi_permohonan()
+    });
+}

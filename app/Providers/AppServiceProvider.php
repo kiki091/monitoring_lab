@@ -45,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\Kategori', 'App\Repositories\Implementation\Kategori');
         $this->app->bind('App\Repositories\Contracts\Sample', 'App\Repositories\Implementation\Sample');
         $this->app->bind('App\Repositories\Contracts\Permohonan', 'App\Repositories\Implementation\Permohonan');
+        $this->app->bind('App\Repositories\Contracts\Verifikasi', 'App\Repositories\Implementation\Verifikasi');
     }
 
     /**
@@ -77,6 +78,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\Kategori',
             'App\Repositories\Contracts\Sample',
             'App\Repositories\Contracts\Permohonan',
+            'App\Repositories\Contracts\Verifikasi',
         );
     }
 }

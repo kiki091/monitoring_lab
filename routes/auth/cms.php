@@ -166,6 +166,12 @@ Route::group(['prefix' => 'master-data'], function () {
 		Route::post('store', 'Pages\PermohonanController@store')->name('cms_master_permohonan_store');
 		Route::post('edit', 'Pages\PermohonanController@edit')->name('cms_master_permohonan_edit');
 	});
+	
+	Route::group(['prefix' => 'varifikasi'], function () {
+		Route::get('/', 'Pages\VerifikasiController@index')->name('cms_varifikasi_index');
+		Route::get('data', 'Pages\VerifikasiController@getData')->name('cms_varifikasi_data');
+		Route::post('store', 'Pages\VerifikasiController@store')->name('cms_varifikasi_store');
+	});
 
 	
 });
